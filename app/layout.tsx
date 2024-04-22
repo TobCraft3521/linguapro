@@ -3,12 +3,13 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/global/theme-provider"
 import { ClerkProvider } from "@clerk/nextjs"
+import Header from "@/components/header/header"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Items",
-  description: "The official items webapp",
+  title: "Flueny",
+  description: "Learn any language with Flueny",
 }
 
 export default function RootLayout({
@@ -19,14 +20,23 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <head>
+          <link
+            href="https://fonts.googleapis.com/css?family=Varela+Round"
+            rel="stylesheet"
+          ></link>
+        </head>
         <body className={inter.className}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="light"
             enableSystem
             storageKey="items-theme"
           >
-            {children}
+            <main className="flex min-h-screen w-full flex-col">
+              <Header />
+              {children}
+            </main>
           </ThemeProvider>
         </body>
       </html>

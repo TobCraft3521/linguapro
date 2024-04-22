@@ -12,3 +12,57 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Profile {
+  id       String @id @default(uuid())
+  userId   String @unique
+  name     String @default("New Profile")
+  imageUrl String @db.Text
+  email    String @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Lesson {
+  id    String @id @default(uuid())
+  index Int
+  title String
+  units Unit[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Unit {
+  id    String @id @default(uuid())
+  index Int
+  title String
+
+  tasks Task[]
+
+  lessonId String
+  lesson   Lesson @relation(fields: [lessonId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum TaskType {
+  TEXT
+  VIDEO
+  QUIZ
+}
+
+model Task {
+  id    String @id @default(uuid())
+  index Int
+  title String
+  type  String
+
+  unitId String
+  unit   Unit   @relation(fields: [unitId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
