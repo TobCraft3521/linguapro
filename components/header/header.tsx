@@ -1,28 +1,29 @@
-"use client"
-
+import { cn } from "@/lib/utils"
+import { UserButton, auth, currentUser } from "@clerk/nextjs"
 import { Menu } from "lucide-react"
 import { ModeToggle } from "../global/mode-toggle"
-import Flueny from "./flueny-logo"
-import { useEffect, useState } from "react"
 import { Button } from "../ui/button"
+import Flueny from "./flueny-logo"
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet"
+import Sidebar from "../sidebar/sidebar"
 
-interface HeaderProps {}
+interface HeaderProps {
+  border?: boolean
+}
 
-const Header = ({}: HeaderProps) => {
-  const [isLandingPage, setIsLandingPage] = useState(false)
-  useEffect(() => {
-    setIsLandingPage(window.location.pathname === "/")
-  }, [])
+const Header = async ({ border }: HeaderProps) => {
+  const { userId } = auth()
+  const user = await currentUser()
   return (
     <header
-      className={
-        "top-0 h-16 w-full flex justify-between items-center pl-16 pr-8 border-b-[1px]" +
-        (isLandingPage && "border-b-0 pt-8")
-      }
+      className={cn(
+        "top-0 h-16 w-full flex justify-between items-center md:pl-16 pl-8 pr-8 border-b-[1px]",
+        !border && "border-b-0 pt-8"
+      )}
     >
       <Flueny />
-      <div className="flex flex-row justify-center items-center gap-8">
-        {isLandingPage && (
+      <div className="flex flex-row justify-center items-center gap-4 md:gap-8">
+        {!userId && (
           <div className="flex-row gap-2 justify-center items-center hidden md:flex">
             <a href="/sign-up">
               <Button variant="primary" className="uppercase font-extrabold">
@@ -36,8 +37,21 @@ const Header = ({}: HeaderProps) => {
             </a>
           </div>
         )}
+        {userId && (
+          <div className="flex flex-row justify-center items-center gap-2 uppercase font-semibold text-sm h-full">
+            <UserButton />
+            {user?.username}
+          </div>
+        )}
         <ModeToggle />
-        <Menu size={24} className="lg:hidden" />
+        <Sheet>
+          <SheetTrigger asChild className="lg:hidden">
+            <Menu size={24} />
+          </SheetTrigger>
+          <SheetContent>
+            <Sidebar className="" />
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   )

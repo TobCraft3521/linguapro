@@ -6,11 +6,11 @@ const FullWidthSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-extrabold text-white tracking-tight sm:text-4xl">
-            Explore Our Features
+            Flueny: Elevate Your Language Skills with Ethan
           </h2>
           <p className="mt-4 text-xl text-gray-300">
-            Discover the power of our language learning platform and take your
-            skills to new heights.
+            With Flueny, your language skills grow alongside Ethan's life,
+            guiding you through a dynamic learning experience.
           </p>
         </div>
 
@@ -19,37 +19,42 @@ const FullWidthSection = () => {
             {/* Replace with your content */}
             <div className="bg-white p-6 rounded-lg shadow-xl">
               <h3 className="text-xl font-semibold text-gray-800">
-                Interactive Pronunciation Practice
+                Interactive Lessons
               </h3>
               <p className="mt-2 text-gray-600">
-                Master your pronunciation with engaging exercises and real-time
-                feedback.
+                Engage with immersive lessons designed to enhance your language
+                proficiency through interactive exercises and real-world
+                scenarios.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-xl">
               <h3 className="text-xl font-semibold text-gray-800">
-                Offline Access
+                Adaptive Learning
               </h3>
               <p className="mt-2 text-gray-600">
-                Access our vast library of lessons offline, perfect for learning
-                on the go.
+                Personalize your learning journey with adaptive algorithms that
+                tailor lesson content and difficulty based on your progress and
+                preferences.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-xl">
               <h3 className="text-xl font-semibold text-gray-800">
-                Global Community
+                Community Engagement
               </h3>
               <p className="mt-2 text-gray-600">
-                Connect with millions of learners and native speakers worldwide.
+                Join a vibrant community of language enthusiasts and native
+                speakers from around the world to practice, exchange cultural
+                insights, and foster global connections.
               </p>
             </div>
             <div className="bg-white p-6 rounded-lg shadow-xl">
               <h3 className="text-xl font-semibold text-gray-800">
-                Personalized Recommendations
+                Progress Tracking
               </h3>
               <p className="mt-2 text-gray-600">
-                Receive tailored lesson recommendations based on your unique
-                learning style.
+                Monitor your language learning journey with detailed progress
+                tracking features, including performance analytics,
+                achievements, and personalized recommendations.
               </p>
             </div>
           </div>

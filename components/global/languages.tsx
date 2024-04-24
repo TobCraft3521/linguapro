@@ -42,15 +42,15 @@ const Flags = () => {
       <Carousel
         opts={{ loop: true, align: "center" }}
         plugins={[plugin.current]}
-        className="w-full xl:max-w-xl max-w-[75vw]"
+        className="w-full xl:max-w-xl max-w-[75vw] md:max-w-[50vw]"
       >
         <CarouselContent>
           {flags.map((flag, index) => (
             <CarouselItem
-              className="basis-1/4 md:basis-1/6 lg:basis-1/6"
+              className="basis-1/4 md:basis-1/6 lg:basis-1/6 justify-center items-center"
               key={index}
             >
-              {flag}
+              <div className="rounded-lg overflow-hidden">{flag}</div>
             </CarouselItem>
           ))}
         </CarouselContent>

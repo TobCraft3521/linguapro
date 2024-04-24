@@ -33,10 +33,7 @@ export default function RootLayout({
             enableSystem
             storageKey="items-theme"
           >
-            <main className="flex min-h-screen w-full flex-col">
-              <Header />
-              {children}
-            </main>
+            {children}
           </ThemeProvider>
         </body>
       </html>
