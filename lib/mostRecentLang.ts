@@ -1,6 +1,7 @@
 "use server"
 import { auth } from "@clerk/nextjs"
 import { db } from "./db"
+import { Language } from "@prisma/client"
 
 export const mostRecentLang = async () => {
   const { userId } = auth()
@@ -10,10 +11,10 @@ export const mostRecentLang = async () => {
       userId,
     },
   })
-  return res?.mostRecentLang
+  return res?.mostRecentLang as Language
 }
 
-export const updateMostRecentLang = async (code: string) => {
+export const updateMostRecentLang = async (code: Language) => {
   const { userId } = auth()
   if (!userId) return
   await db.user.update({
@@ -21,7 +22,7 @@ export const updateMostRecentLang = async (code: string) => {
       userId,
     },
     data: {
-      mostRecentLang: code,
+      mostRecentLang: Language[code] as Language,
     },
   })
 }

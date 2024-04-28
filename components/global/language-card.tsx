@@ -1,5 +1,6 @@
 "use client"
 import { updateMostRecentLang } from "@/lib/mostRecentLang"
+import { Language } from "@prisma/client"
 import { useRouter } from "next/navigation"
 
 interface LanguageCardProps {
@@ -14,8 +15,9 @@ const LanguageCard = ({ language }: LanguageCardProps) => {
   const router = useRouter()
 
   const handleLanguageSelect = async (code: string) => {
-    await updateMostRecentLang(code)
+    await updateMostRecentLang(code.toUpperCase() as Language)
     await router.push(`/dashboard/lang/${code}`)
+    await router.refresh()
   }
   return (
     <div

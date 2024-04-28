@@ -19,7 +19,7 @@ const Tab = ({ tab }: TabProps) => {
       <div className="block">
         <div
           className={cn(
-            "flex items-center py-2 px-4 rounded-lg transition-colors hover:bg-slate-200 dark:hover:bg-zinc-700 cursor-pointer",
+            "flex items-center py-2 px-4 rounded-lg transition- hover:bg-slate-200 dark:hover:bg-zinc-700 cursor-pointer",
             isActive ? "bg-slate-200 dark:bg-zinc-700" : ""
           )}
         >

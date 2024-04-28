@@ -10,7 +10,9 @@ const Sidebar = async ({ className }: { className: string }) => {
   const tabs = [
     {
       name: "Home",
-      href: "/dashboard/lang/" + mostRecentLanguage,
+      href: mostRecentLanguage
+        ? `/dashboard/lang/${mostRecentLanguage}`
+        : "/dashboard",
       icon: <Home size={24} />,
     },
     {
@@ -20,7 +22,7 @@ const Sidebar = async ({ className }: { className: string }) => {
     },
     {
       name: "Courses",
-      href: "/dashboard",
+      href: mostRecentLanguage ? `/dashboard` : "/dashboard/",
       icon: <Languages size={24} />,
     },
     {

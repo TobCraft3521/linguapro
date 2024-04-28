@@ -1,8 +1,7 @@
 import LanguageCard from "@/components/global/language-card"
-import { initProfile } from "@/lib/profiles"
+import { initUser } from "@/lib/profiles"
 import { auth, redirectToSignUp } from "@clerk/nextjs"
 import { DE, ES, FR, IT } from "country-flag-icons/react/3x2"
-import { useRouter } from "next/navigation"
 
 interface DashboardProps {}
 
@@ -32,7 +31,7 @@ const languages = [
 const Dashboard = async ({}: DashboardProps) => {
   const userId = auth()
   if (!userId) return redirectToSignUp()
-  const user = await initProfile()
+  const user = await initUser()
 
   return (
     <div className="bg-gray-0 h-[100vh] flex flex-1 flex-col p-8">
