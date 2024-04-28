@@ -37,7 +37,7 @@ const Dashboard = async ({}: DashboardProps) => {
   return (
     <div className="bg-gray-0 h-[100vh] flex flex-1 flex-col p-8">
       <div>
-        <h1 className="text-2xl font-medium text-center mt-8">
+        <h1 className="text-2xl font-semibold text-center mt-8">
           Welcome{" "}
           <span className="bg-gradient-to-r inline-block from-[#7F00FF] to-[#E100FF] text-transparent bg-clip-text">
             {user?.userName}
@@ -51,7 +51,7 @@ const Dashboard = async ({}: DashboardProps) => {
         </p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full gap-4 md:p-16">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full gap-4 py-16 md:p-16">
         {languages.map((language) => (
           <LanguageCard language={language} />
         ))}

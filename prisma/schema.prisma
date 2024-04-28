@@ -14,23 +14,28 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(uuid())
-  userId   String    @unique
-  name     String    @default("New User")
-  userName String    @unique
-  imageUrl String    @db.Text
-  email    String    @db.Text
-  profiles Profile[]
+  id             String    @id @default(uuid())
+  userId         String    @unique
+  name           String    @default("New User")
+  userName       String    @unique
+  imageUrl       String    @db.Text
+  email          String    @db.Text
+  profiles       Profile[]
+  mostRecentLang String    @default("")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Profile {
-  id       String   @id @default(uuid())
-  userId   String   @unique
-  user     User     @relation(fields: [userId], references: [id])
-  language Language
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id])
+  language        Language
+  coins           Int      @default(0)
+  superCoins      Int      @default(0)
+  lessonsProgress Int      @default(0)
+  unitsProgress   Int      @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -43,6 +48,7 @@ enum Language {
   IT
 }
 
+// = language
 model Course {
   id          String   @id @default(uuid())
   title       String
@@ -54,6 +60,7 @@ model Course {
   updatedAt DateTime @updatedAt
 }
 
+// = ethans age
 model Lesson {
   id       String @id @default(uuid())
   index    Int
@@ -66,6 +73,7 @@ model Lesson {
   updatedAt DateTime @updatedAt
 }
 
+// = small step
 model Unit {
   id    String @id @default(uuid())
   index Int
@@ -87,6 +95,7 @@ enum TaskType {
   LISTEN
 }
 
+// = one task, like match the words
 model Task {
   id    String @id @default(uuid())
   index Int

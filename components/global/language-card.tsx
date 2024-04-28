@@ -1,4 +1,5 @@
 "use client"
+import { updateMostRecentLang } from "@/lib/mostRecentLang"
 import { useRouter } from "next/navigation"
 
 interface LanguageCardProps {
@@ -13,7 +14,8 @@ const LanguageCard = ({ language }: LanguageCardProps) => {
   const router = useRouter()
 
   const handleLanguageSelect = async (code: string) => {
-    await router.push(`/dashboard/${code}`)
+    await updateMostRecentLang(code)
+    await router.push(`/dashboard/lang/${code}`)
   }
   return (
     <div

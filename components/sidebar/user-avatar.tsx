@@ -15,7 +15,7 @@ const UserCard = async ({}) => {
       py-2 
       dark:bg-zinc-800
       bg-slate-100
-      rounded-3xl
+      rounded-2xl
   "
     >
       <aside className="flex justify-center items-center gap-2">
@@ -42,7 +42,7 @@ const UserCard = async ({}) => {
       </aside>
       <div className="flex items-center justify-center space-x-4">
         <ModeToggle />
-        <div className="rounded-full overflow-hidden">
+        <div className="overflow-hidden">
           <SignOutButton>
             <LogOut className="cursor-pointer" />
           </SignOutButton>

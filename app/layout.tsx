@@ -27,7 +27,7 @@ export default function RootLayout({
           ></link>
         </head>
         <body
-          className={(inter.className += " bg-[#f7f7f8] dark:bg-[#1a1a1b]")}
+          className={(inter.className += " bg-[#f7f7f8] dark:bg-[#282829]")}
         >
           <ThemeProvider
             attribute="class"
