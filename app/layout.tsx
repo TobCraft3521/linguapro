@@ -26,7 +26,9 @@ export default function RootLayout({
             rel="stylesheet"
           ></link>
         </head>
-        <body className={inter.className}>
+        <body
+          className={(inter.className += " bg-[#f7f7f8] dark:bg-[#1a1a1b]")}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="light"

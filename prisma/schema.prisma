@@ -13,22 +13,54 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id       String    @id @default(uuid())
+  userId   String    @unique
+  name     String    @default("New User")
+  userName String    @unique
+  imageUrl String    @db.Text
+  email    String    @db.Text
+  profiles Profile[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Profile {
-  id       String @id @default(uuid())
-  userId   String @unique
-  name     String @default("New Profile")
-  imageUrl String @db.Text
-  email    String @db.Text
+  id       String   @id @default(uuid())
+  userId   String   @unique
+  user     User     @relation(fields: [userId], references: [id])
+  language Language
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Language {
+  FR
+  DE
+  ES
+  IT
+}
+
+model Course {
+  id          String   @id @default(uuid())
+  title       String
+  image       String
+  description String
+  lessons     Lesson[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Lesson {
-  id    String @id @default(uuid())
-  index Int
-  title String
-  units Unit[]
+  id       String @id @default(uuid())
+  index    Int
+  title    String
+  units    Unit[]
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -49,9 +81,10 @@ model Unit {
 }
 
 enum TaskType {
-  TEXT
-  VIDEO
-  QUIZ
+  SELECT
+  GAPS
+  MATCH
+  LISTEN
 }
 
 model Task {

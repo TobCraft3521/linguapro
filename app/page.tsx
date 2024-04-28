@@ -1,11 +1,13 @@
-import FullWidthSection from "@/components/global/blabla"
-import Flags from "@/components/global/languages"
+import FullWidthSection from "@/components/landing-page/blabla"
+import Flags from "@/components/landing-page/languages"
 import Flueny from "@/components/header/flueny-logo"
 import Header from "@/components/header/header"
 import { Button } from "@/components/ui/button"
 import People from "@/public/imgs/people.png"
 import Image from "next/image"
 import Link from "next/link"
+import IntroductionBlock from "@/components/landing-page/intro"
+import AdditionalInfoBlock from "@/components/landing-page/third"
 
 export default function Home() {
   return (
@@ -46,6 +48,8 @@ export default function Home() {
         <Flags />
         <div className="h-16" />
         <FullWidthSection />
+        <IntroductionBlock />
+        <AdditionalInfoBlock />
       </main>
     </main>
   )

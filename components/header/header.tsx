@@ -40,7 +40,7 @@ const Header = async ({ border }: HeaderProps) => {
         {userId && (
           <div className="flex flex-row justify-center items-center gap-2 uppercase font-semibold text-sm h-full">
             <UserButton />
-            {user?.username}
+            <div className="hidden md:flex">{user?.username}</div>
           </div>
         )}
         <ModeToggle />

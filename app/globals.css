@@ -67,9 +67,6 @@
 }
 
 body {
-  .dark {
-    background-color: #1a1a1b;
-  }
   min-height: 100vh;
 }
 

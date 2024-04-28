@@ -2,7 +2,7 @@ import Link from "next/link"
 
 const Flueny = () => {
   return (
-    <span className="">
+    <span className="z-20">
       <Link
         href="/"
         className="flex flex-row gap-2 justify-center items-center"
@@ -36,9 +36,9 @@ const Flueny = () => {
             strokeWidth="16"
           ></line>
         </svg>
-        <p className="cursor-pointer">
+        <p className="cursor-pointer flex">
           <span
-            className="uppercase text-2xl  text-teal-500"
+            className="uppercase text-2xl flex flex-1 justify-center items-center text-teal-500"
             style={{
               fontFamily: "Varela Round",
               fontWeight: 950,
@@ -47,7 +47,7 @@ const Flueny = () => {
             F
           </span>
           <span
-            className="uppercase text-2xl  text-teal-500"
+            className="uppercase text-2xl flex flex-1 justify-center items-center text-teal-500"
             style={{
               fontFamily: "Varela Round",
               fontWeight: 950,
@@ -56,7 +56,7 @@ const Flueny = () => {
             L
           </span>
           <span
-            className="uppercase text-2xl  text-teal-400"
+            className="uppercase text-2xl flex flex-1 justify-center items-center text-teal-400"
             style={{
               fontFamily: "Varela Round",
               fontWeight: 950,
@@ -65,7 +65,7 @@ const Flueny = () => {
             U
           </span>
           <span
-            className="uppercase text-2xl  text-teal-400"
+            className="uppercase text-2xl flex flex-1 justify-center items-center text-teal-400"
             style={{
               fontFamily: "Varela Round",
               fontWeight: 950,
@@ -74,7 +74,7 @@ const Flueny = () => {
             E
           </span>
           <span
-            className="uppercase text-2xl  text-teal-300"
+            className="uppercase text-2xl flex flex-1 justify-center items-center text-teal-300"
             style={{
               fontFamily: "Varela Round",
               fontWeight: 950,
@@ -83,7 +83,7 @@ const Flueny = () => {
             N
           </span>
           <span
-            className="uppercase text-2xl  text-teal-300"
+            className="uppercase text-2xl flex flex-1 justify-center items-center text-teal-300"
             style={{
               fontFamily: "Varela Round",
               fontWeight: 950,
