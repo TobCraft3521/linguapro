@@ -43,7 +43,7 @@ model Profile {
   updatedAt DateTime @updatedAt
 
   // Define the relationship with user
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum Language {
@@ -72,7 +72,7 @@ model Lesson {
   title    String
   units    Unit[]
   courseId String
-  course   Course @relation(fields: [courseId], references: [id])
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -87,7 +87,7 @@ model Unit {
   tasks Task[]
 
   lessonId String
-  lesson   Lesson @relation(fields: [lessonId], references: [id])
+  lesson   Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -108,7 +108,7 @@ model Task {
   type  String
 
   unitId String
-  unit   Unit   @relation(fields: [unitId], references: [id])
+  unit   Unit   @relation(fields: [unitId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
