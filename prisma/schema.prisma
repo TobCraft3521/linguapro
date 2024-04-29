@@ -44,6 +44,8 @@ model Profile {
 
   // Define the relationship with user
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, language])
 }
 
 enum Language {
@@ -59,13 +61,14 @@ model Course {
   title       String
   image       String
   description String
+  language    Language
   lessons     Lesson[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-// = ethans age
+// = topic / level / category eg basic words and grammar
 model Lesson {
   id       String @id @default(uuid())
   index    Int
@@ -78,7 +81,7 @@ model Lesson {
   updatedAt DateTime @updatedAt
 }
 
-// = small step
+// = ethans age
 model Unit {
   id    String @id @default(uuid())
   index Int

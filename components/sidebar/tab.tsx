@@ -13,7 +13,7 @@ interface TabProps {
 
 const Tab = ({ tab }: TabProps) => {
   const path = usePathname()
-  const isActive = path === tab.href
+  const isActive = path.toLowerCase() === tab.href.toLowerCase()
   return (
     <Link href={tab.href}>
       <div className="block">

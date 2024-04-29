@@ -1,5 +1,4 @@
 import { SignIn, auth } from "@clerk/nextjs"
-import "./style.css"
 import { redirect } from "next/navigation"
 import Image from "next/image"
 import Gradient from "@/public/imgs/backgrounds/bggradientred.webp"

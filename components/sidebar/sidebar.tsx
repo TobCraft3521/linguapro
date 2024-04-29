@@ -11,7 +11,7 @@ const Sidebar = async ({ className }: { className: string }) => {
     {
       name: "Home",
       href: mostRecentLanguage
-        ? `/dashboard/lang/${mostRecentLanguage}`
+        ? `/dashboard/lang/${mostRecentLanguage.toLowerCase()}`
         : "/dashboard",
       icon: <Home size={24} />,
     },
