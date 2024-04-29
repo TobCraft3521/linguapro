@@ -57,11 +57,14 @@ export const initProfile = async () => {
   const mostRecentLanguage = await mostRecentLang()
   if (!mostRecentLanguage) return
   console.log(dbProfile, mostRecentLanguage)
-  const profile = await db.profile.create({
-    data: {
-      userId: dbUser.id,
-      language: Language[mostRecentLanguage] as Language,
-    },
-  })
-  return profile
+  try {
+    const profile = await db.profile.create({
+      data: {
+        userId: dbUser.id,
+        language: Language[mostRecentLanguage] as Language,
+      },
+    })
+    return profile
+  } catch (e) {}
+  return null
 }
