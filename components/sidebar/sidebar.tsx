@@ -34,7 +34,7 @@ const Sidebar = async ({ className }: { className: string }) => {
   return (
     <div
       className={cn(
-        "w-[75vw] flex-col gap-8 lg:bg-zinc-50 lg:dark:bg-[#232323] mt-8 lg:mt-0 h-[90vh] lg:h-[100vh] lg:flex-1 flex sm:max-w-xs max-w-xs border-r-[1px] pr-8 lg:p-8 lg:pb-6 z-10 rounded-r-3xl",
+        "w-[75vw] flex-col gap-8 lg:bg-zinc-50 lg:dark:bg-[#232323] mt-8 lg:mt-0 h-[90vh] lg:h-[100vh] lg:flex-1 flex sm:max-w-xs max-w-xs border-r-[1px] drop-shadow-xl pr-8 lg:p-8 lg:pb-6 z-10 rounded-r-3xl",
         className
       )}
     >

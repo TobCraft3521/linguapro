@@ -13,8 +13,11 @@ const PathPage = async () => {
   //router.refresh()
   const profile = await initProfile()
   return (
-    <div className="flex flex-1">
-      <Path />
+    <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 xl:max-w-[55vw] h-[100vh]">
+        <Path />
+      </div>
+      {/* right sidebar stuff */}
     </div>
   )
 }

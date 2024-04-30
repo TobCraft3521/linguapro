@@ -70,12 +70,14 @@ model Course {
 
 // = topic / level / category eg basic words and grammar
 model Lesson {
-  id       String @id @default(uuid())
-  index    Int
-  title    String
-  units    Unit[]
-  courseId String
-  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  id          String @id @default(uuid())
+  index       Int
+  title       String
+  description String @default("")
+  units       Unit[]
+  colorHex    String @default("#58cc02")
+  courseId    String
+  course      Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

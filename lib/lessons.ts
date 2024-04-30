@@ -1,25 +1,32 @@
 "use server"
 import { Language } from "@prisma/client"
 import { db } from "./db"
+import { cache } from "react"
 
-export const getCourses = async () => {
+export const getCourses = cache(async () => {
   return await db.course.findMany()
-}
+})
 
-export const getLessonsByCourse = async (code: Language) => {
+export const getLessonsByCourse = cache(async (code: Language) => {
   return await db.lesson.findMany({
     where: {
       course: {
         language: code,
       },
     },
+    include: {
+      units: true,
+    },
+    orderBy: {
+      index: "asc",
+    },
   })
-}
+})
 
-export const getUnitsByLesson = async (lessonId: string) => {
+export const getUnitsByLesson = cache(async (lessonId: string) => {
   return await db.unit.findMany({
     where: {
       lessonId: lessonId,
     },
   })
-}
+})
