@@ -36,7 +36,7 @@ const Path: React.FC<PathProps> = () => {
 
       if (
         rect.bottom > containerTop - offset &&
-        rect.bottom <= containerBottom + offset
+        rect.bottom <= containerBottom
       ) {
         // Update if the bottom of the element is within the container's bounds with the offset
         const lessonId = element.getAttribute("data-lesson-id")

@@ -7,7 +7,7 @@ interface LessonCompProps {
 const LessonComp = ({ lesson }: LessonCompProps) => {
   return (
     <div
-      className="lesson h-[100vh] bg-slate-500 m-8"
+      className="lesson h-[50vh] bg-slate-500 m-8"
       data-lesson-id={lesson.id}
     >
       <h1>Lesson {lesson.title}</h1>
