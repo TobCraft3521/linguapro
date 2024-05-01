@@ -5,11 +5,14 @@ import { useParams } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import LessonComp from "./lesson"
 import LessonsHeader from "./lesson-header"
+import Link from "next/link"
+import { ArrowBigLeft, ChevronLeft, Loader2 } from "lucide-react"
+import { ScrollArea } from "../ui/scroll-area"
 
 interface PathProps {}
 
 const Path: React.FC<PathProps> = () => {
-  const [lessons, setLessons] = useState<Lesson[]>([])
+  const [lessons, setLessons] = useState<Lesson[] | null>(null)
   const [viewedLesson, setViewedLesson] = useState<Lesson | null>(null)
 
   const { lang } = useParams()
@@ -18,6 +21,7 @@ const Path: React.FC<PathProps> = () => {
   const containerRef = useRef<HTMLDivElement>(null)
 
   const handleScroll = () => {
+    console.log("first")
     const container = containerRef.current
     if (!container) return
 
@@ -40,7 +44,7 @@ const Path: React.FC<PathProps> = () => {
       ) {
         // Update if the bottom of the element is within the container's bounds with the offset
         const lessonId = element.getAttribute("data-lesson-id")
-        newViewedLesson = lessons.find((lesson) => lesson.id === lessonId)
+        newViewedLesson = lessons?.find((lesson) => lesson.id === lessonId)
       }
     })
 
@@ -71,19 +75,48 @@ const Path: React.FC<PathProps> = () => {
     })()
   }, [lang])
 
+  if (!lessons)
+    return (
+      <div className="flex flex-1 left-0 relative">
+        <LessonsHeader lesson={viewedLesson} />
+        <div
+          className="h-[100vh] flex flex-col items-center justify-center text-center flex-1 text-lg text-neutral-500 dark:text-neutral-400 font-bold animate-spin"
+          ref={containerRef}
+        >
+          <Loader2 size={32} />
+        </div>
+      </div>
+    )
+
+  if (lessons?.length === 0)
+    return (
+      <div className="flex flex-1 left-0 relative">
+        <LessonsHeader lesson={viewedLesson} />
+        <div
+          className="h-[100vh] flex flex-col items-center justify-center text-center flex-1 text-lg text-neutral-500 dark:text-neutral-400 font-bold"
+          ref={containerRef}
+        >
+          Wooopsy! No lessons found.
+          <Link href="/dashboard" className="flex flex-row items-center mt-2">
+            <ChevronLeft /> Back to Courses
+          </Link>
+        </div>
+      </div>
+    )
+
   return (
     <div className="flex flex-1 left-0 relative">
       <LessonsHeader lesson={viewedLesson} />
-      <div
-        className="h-[100vh] overflow-y-scroll flex-1 pt-32"
+      <ScrollArea
+        className="h-[100vh] overflow-y-auto overflow-x-hidden flex-1 pt-32"
         ref={containerRef}
       >
-        {lessons.map((lesson) => (
+        {lessons?.map((lesson) => (
           <div key={lesson.id}>
             <LessonComp lesson={lesson} />
           </div>
         ))}
-      </div>
+      </ScrollArea>
     </div>
   )
 }

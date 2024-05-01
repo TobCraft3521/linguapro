@@ -1,15 +1,15 @@
+import { ThemeProvider } from "@/components/global/theme-provider"
+import { ClerkProvider } from "@clerk/nextjs"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { ThemeProvider } from "@/components/global/theme-provider"
-import { ClerkProvider } from "@clerk/nextjs"
-import Header from "@/components/header/header"
+import { Toaster } from "react-hot-toast"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Flueny",
-  description: "Learn any language with Flueny",
+  description: "Learn a new language or improve your skills with Flueny!",
 }
 
 export default function RootLayout({
@@ -35,6 +35,7 @@ export default function RootLayout({
             enableSystem
             storageKey="items-theme"
           >
+            <Toaster />
             {children}
           </ThemeProvider>
         </body>

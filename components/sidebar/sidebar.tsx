@@ -4,6 +4,7 @@ import { Home, Languages, Settings, User } from "lucide-react"
 import Flueny from "../header/flueny-logo"
 import Tab from "./tab"
 import UserCard from "./user-avatar"
+import { Separator } from "../ui/separator"
 
 const Sidebar = async ({ className }: { className: string }) => {
   const mostRecentLanguage = await mostRecentLang()
@@ -34,7 +35,7 @@ const Sidebar = async ({ className }: { className: string }) => {
   return (
     <div
       className={cn(
-        "w-[75vw] flex-col gap-8 lg:bg-zinc-50 lg:dark:bg-[#232323] mt-8 lg:mt-0 h-[90vh] lg:h-[100vh] lg:flex-1 flex sm:max-w-xs max-w-xs border-r-[1px] drop-shadow-xl pr-8 lg:p-8 lg:pb-6 z-10 rounded-r-3xl",
+        "w-[75vw] flex-col gap-8 lg:bg-zinc-50 lg:dark:bg-[#232323] mt-8 lg:mt-0 h-[90vh] lg:h-[100vh] lg:flex-1 flex sm:max-w-xs max-w-xs border-r-[2px] pr-8 lg:p-8 lg:pb-6 z-10 rounded-r-[35px]",
         className
       )}
     >
@@ -44,6 +45,7 @@ const Sidebar = async ({ className }: { className: string }) => {
           <h1 className="ml-4 text-zinc-500 text-lg font-semibold">
             Dashboard
           </h1>
+          <Separator className="m-1 mb-3" />
           <div className="flex gap-1 flex-col">
             {tabs.map((tab, index) => (
               <Tab tab={tab} key={index} />

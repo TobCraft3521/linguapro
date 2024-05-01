@@ -19,7 +19,11 @@ const LessonsHeader = ({ lesson }: LessonsHeaderProps) => {
         backgroundColor: lesson?.colorHex,
       }}
     >
-      <h1 className="text-lg font-semibold">{lesson?.title}</h1>
+      <h1 className="text-lg font-semibold">
+        {lesson.index + 1}
+        {". "}
+        {lesson?.title}
+      </h1>
       <p className="text-sm">{lesson?.description}</p>
     </div>
   )
