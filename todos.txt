@@ -1,0 +1,3 @@
+professional (ironic)
+todo list:
+- bg gradients for lesson header

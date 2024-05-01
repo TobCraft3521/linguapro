@@ -35,14 +35,14 @@ const Sidebar = async ({ className }: { className: string }) => {
   return (
     <div
       className={cn(
-        "w-[75vw] flex-col gap-8 lg:bg-zinc-50 lg:dark:bg-[#232323] mt-8 lg:mt-0 h-[90vh] lg:h-[100vh] lg:flex-1 flex sm:max-w-xs max-w-xs border-r-[2px] pr-8 lg:p-8 lg:pb-6 z-10 rounded-r-[35px]",
+        "w-[75vw] flex-col gap-8 mt-8 lg:mt-0 h-[90vh] lg:h-[100vh] lg:flex-1 flex sm:max-w-xs max-w-xs pr-8 lg:p-8 lg:pb-6 z-10",
         className
       )}
     >
       <div className="space-y-8">
         <Flueny />
         <div className="w-full">
-          <h1 className="ml-4 text-zinc-500 text-lg font-semibold">
+          <h1 className="ml-4 text-zinc-500 text-md font-bold uppercase">
             Dashboard
           </h1>
           <Separator className="m-1 mb-3" />
