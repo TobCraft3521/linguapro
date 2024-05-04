@@ -1,0 +1,14 @@
+.dashboard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    #37afff,
+    rgba(0, 0, 0, 0)
+  );
+}

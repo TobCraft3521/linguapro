@@ -14,7 +14,7 @@ const PathPage = async () => {
   const profile = await initProfile()
   return (
     <div className="flex flex-1">
-      <div className="flex flex-1 xl:max-w-[55vw] h-[99vh]">
+      <div className="flex flex-1 xl:max-w-[55vw]">
         <Path />
       </div>
       {/* right sidebar stuff */}

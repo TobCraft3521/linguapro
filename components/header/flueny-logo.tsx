@@ -38,58 +38,13 @@ const Flueny = () => {
         </svg>
         <p className="cursor-pointer flex">
           <span
-            className="uppercase text-2xl flex flex-1 justify-center items-center text-teal-500"
+            className="uppercase text-2xl flex flex-1 justify-center items-center text-[#37afff]"
             style={{
               fontFamily: "Varela Round",
               fontWeight: 950,
             }}
           >
-            F
-          </span>
-          <span
-            className="uppercase text-2xl flex flex-1 justify-center items-center text-teal-500"
-            style={{
-              fontFamily: "Varela Round",
-              fontWeight: 950,
-            }}
-          >
-            L
-          </span>
-          <span
-            className="uppercase text-2xl flex flex-1 justify-center items-center text-teal-400"
-            style={{
-              fontFamily: "Varela Round",
-              fontWeight: 950,
-            }}
-          >
-            U
-          </span>
-          <span
-            className="uppercase text-2xl flex flex-1 justify-center items-center text-teal-400"
-            style={{
-              fontFamily: "Varela Round",
-              fontWeight: 950,
-            }}
-          >
-            E
-          </span>
-          <span
-            className="uppercase text-2xl flex flex-1 justify-center items-center text-teal-300"
-            style={{
-              fontFamily: "Varela Round",
-              fontWeight: 950,
-            }}
-          >
-            N
-          </span>
-          <span
-            className="uppercase text-2xl flex flex-1 justify-center items-center text-teal-300"
-            style={{
-              fontFamily: "Varela Round",
-              fontWeight: 950,
-            }}
-          >
-            Y
+            FLUENY
           </span>
         </p>
       </Link>

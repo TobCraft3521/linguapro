@@ -15,7 +15,11 @@ export const getLessonsByCourse = cache(async (code: Language) => {
       },
     },
     include: {
-      units: true,
+      units: {
+        orderBy: {
+          index: "asc",
+        },
+      },
     },
     orderBy: {
       index: "asc",

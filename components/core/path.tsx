@@ -1,6 +1,6 @@
 "use client"
 import { getLessonsByCourse } from "@/lib/lessons"
-import { Language, Lesson } from "@prisma/client"
+import { Language, Lesson, Unit } from "@prisma/client"
 import { useParams } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 import LessonComp from "./lesson"
@@ -11,8 +11,10 @@ import { ScrollArea } from "../ui/scroll-area"
 
 interface PathProps {}
 
+export type LessonWithUnits = Lesson & { units: Unit[] }
+
 const Path: React.FC<PathProps> = () => {
-  const [lessons, setLessons] = useState<Lesson[] | null>(null)
+  const [lessons, setLessons] = useState<LessonWithUnits[] | null>(null)
   const [viewedLesson, setViewedLesson] = useState<Lesson | null>(null)
 
   const { lang } = useParams()
@@ -70,7 +72,7 @@ const Path: React.FC<PathProps> = () => {
         (lang as string).toUpperCase() as Language
       )
       setLessons(dbLessons)
-      console.log(lessons)
+      //console.log(lessons)
       if (!viewedLesson) setViewedLesson(dbLessons[0])
     })()
   }, [lang])
@@ -80,7 +82,7 @@ const Path: React.FC<PathProps> = () => {
       <div className="flex flex-1 left-0 relative">
         <LessonsHeader lesson={viewedLesson} />
         <div
-          className="h-[100vh] flex flex-col items-center justify-center text-center flex-1 text-lg text-neutral-500 dark:text-neutral-400 font-bold animate-spin"
+          className="flex flex-col items-center justify-center text-center flex-1 text-lg text-neutral-500 dark:text-neutral-400 font-bold animate-spin"
           ref={containerRef}
         >
           <Loader2 size={32} />
@@ -93,10 +95,10 @@ const Path: React.FC<PathProps> = () => {
       <div className="flex flex-1 left-0 relative">
         <LessonsHeader lesson={viewedLesson} />
         <div
-          className="h-[100vh] flex flex-col items-center justify-center text-center flex-1 text-lg text-neutral-500 dark:text-neutral-400 font-bold"
+          className="flex flex-col items-center justify-center text-center flex-1 text-lg text-neutral-500 dark:text-neutral-400 font-bold"
           ref={containerRef}
         >
-          Wooopsy! No lessons found.
+          Whoopsy! No lessons found.
           <Link href="/dashboard" className="flex flex-row items-center mt-2">
             <ChevronLeft /> Back to Courses
           </Link>
@@ -108,7 +110,7 @@ const Path: React.FC<PathProps> = () => {
     <div className="flex flex-1 left-0 relative">
       <LessonsHeader lesson={viewedLesson} />
       <ScrollArea
-        className="h-[100vh] overflow-y-auto overflow-x-hidden flex-1 pt-32"
+        className="overflow-y-auto overflow-x-hidden flex-1 pt-36 md:pt-24"
         ref={containerRef}
       >
         {lessons?.map((lesson) => (

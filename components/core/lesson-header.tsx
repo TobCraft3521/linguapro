@@ -14,7 +14,7 @@ const LessonsHeader = ({ lesson }: LessonsHeaderProps) => {
     )
   return (
     <div
-      className="absolute top-10 left-8 right-8 bg-black text-white py-4 px-6 rounded-xl md:rounded-2xl drop-shadow-xl"
+      className="absolute top-8 md:top-2 left-8 right-8 bg-black text-white py-4 px-6 rounded-xl md:rounded-2xl drop-shadow-xl z-20"
       style={{
         backgroundColor: lesson?.colorHex,
       }}

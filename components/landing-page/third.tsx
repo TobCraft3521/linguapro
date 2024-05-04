@@ -15,8 +15,8 @@ const AdditionalInfoBlock = () => {
               Why Choose Flueny?
             </h2>
             <p className="text-lg mb-4 text-white">
-              Ethan's Language Adventure offers a unique and engaging way to
-              learn languages. Here's why you should choose us:
+              We offer a unique and engaging way to learn languages. Here's why
+              you should choose us:
             </p>
             <ul className="list-disc ml-8 text-white">
               <li>Interactive gameplay makes learning fun and immersive</li>
