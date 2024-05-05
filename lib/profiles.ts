@@ -1,3 +1,4 @@
+"use server"
 import { auth, currentUser } from "@clerk/nextjs"
 import { db } from "./db"
 import { Language, User } from "@prisma/client"
@@ -67,4 +68,20 @@ export const initProfile = async () => {
     return profile
   } catch (e) {}
   return null
+}
+
+export const getProfileProgress = async () => {
+  const profile = await activeProfile()
+  if (!profile) return null
+  return profile.progress
+}
+
+export const getLessonLockStates = async (lesson: number) => {
+  const progress = await getProfileProgress()
+  const lockStates: boolean[] = []
+  for (let i = 0; i < 5; i++) {
+    if (lesson * 5 + i > (progress || 0) && i !== 0) lockStates.push(true)
+    else lockStates.push(false)
+  }
+  return lockStates
 }

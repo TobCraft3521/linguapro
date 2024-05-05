@@ -31,13 +31,12 @@ model User {
 }
 
 model Profile {
-  id              String   @id @default(uuid())
-  userId          String
-  language        Language
-  coins           Int      @default(0)
-  superCoins      Int      @default(0)
-  lessonsProgress Int      @default(0)
-  unitsProgress   Int      @default(0)
+  id         String   @id @default(uuid())
+  userId     String
+  language   Language
+  coins      Int      @default(0)
+  superCoins Int      @default(0)
+  progress   Int      @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
