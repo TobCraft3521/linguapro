@@ -1,6 +1,8 @@
 import { Lesson, Unit } from "@prisma/client"
 import { Separator } from "../ui/separator"
 import { LessonWithUnits } from "./path"
+import Image from "next/image"
+import "./lesson.css"
 
 interface LessonCompProps {
   lesson: LessonWithUnits
@@ -30,18 +32,21 @@ function decreaseBrightness(hex: string, amount: number): string {
 }
 
 const LessonComp = ({ lesson }: LessonCompProps) => {
+  const side = lesson.index % 2 === 0
   return (
-    <div className="lesson m-8" data-lesson-id={lesson.id}>
-      <div className="items-center flex my-[8px]">
+    <div className="lesson m-8 relative" data-lesson-id={lesson.id}>
+      <div className="items-center flex my-8">
         <hr className="basis-[48px] flex-grow dark:border-t-[1px] border-t-[2px] border-0 dark:border-white" />
-        <h1 className="mx-[16px] text-center">Lesson {lesson.title}</h1>
+        <h1 className="mx-[16px] text-center font-semibold">
+          Lesson {lesson.title}
+        </h1>
         <hr className="basis-[48px] flex-grow dark:border-t-[1px] border-t-[2px] border-0 dark:border-white" />
       </div>
-      <div className="flex flex-1 flex-col items-center justify-center gap-8">
+      <div className="flex flex-1 flex-col items-center justify-center gap-6">
         {lesson.units.map((unit: Unit) => (
           <div
             key={unit.index}
-            className="flex flex-col flex-1 p-8 rounded-full border-b-4 border-slate-600"
+            className="flex justify-center items-center text-2xl text-white font-extrabold w-16 h-16 rounded-full border-b-4 border-slate-600 rbutton"
             style={{
               transform:
                 "translateX(" +
@@ -49,8 +54,26 @@ const LessonComp = ({ lesson }: LessonCompProps) => {
                 "px)",
               backgroundColor: lesson.colorHex,
             }}
-          ></div>
+          >
+            {unit.index + 1}
+          </div>
         ))}
+      </div>
+      <div
+        className="absolute top-[45%]"
+        style={{
+          left: side ? "10vw" : "",
+          right: side ? "" : "10vw",
+        }}
+      >
+        {lesson.image !== "" && (
+          <Image
+            src={lesson.image}
+            alt="Lesson image"
+            width={200}
+            height={200}
+          />
+        )}
       </div>
     </div>
   )

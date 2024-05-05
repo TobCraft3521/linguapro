@@ -1,0 +1,7 @@
+.rbutton {
+  &:hover {
+    filter: brightness(1.5);
+  }
+
+  transition: all 0.2s ease;
+}

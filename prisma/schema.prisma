@@ -74,6 +74,7 @@ model Lesson {
   index       Int
   title       String
   description String @default("")
+  image       String @default("")
   units       Unit[]
   colorHex    String @default("#58cc02")
   courseId    String
