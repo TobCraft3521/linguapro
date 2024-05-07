@@ -1,7 +1,15 @@
 .rbutton {
   &:hover {
-    filter: brightness(1.5);
+    filter: brightness(1.1);
   }
 
-  transition: all 0.2s ease;
+  transition: all 0.07s ease;
+}
+
+.specialshadow {
+  box-shadow: 0 8px 0 rgb(71 85 105), 0 8px 0 rgb(71 85 105);
+}
+
+.specialshadow:hover {
+  box-shadow: 0 4px 0 rgb(71 85 105), 0 4px 0 rgb(71 85 105);
 }

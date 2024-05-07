@@ -17,7 +17,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         style={{ maxHeight: "calc(100vh - 4rem)" }}
       >
         <Sidebar className="hidden lg:flex" />
-        <div className="flex relative dashboard flex-1 mt-[2vh] md:h-[98vh] overflow-hidden bg-white dark:bg-[#303030] rounded-tl-[1rem] shadow-[0_0_2px_0_theme(colors.black/0.08),_0_1px_2px_0_rgba(25,28,33,0.06),_0_0_0_1px_rgba(25,28,33,0.04)] md:p-8">
+        <div className="flex relative dashboard flex-1 mt-[1vh] md:h-[99vh] overflow-hidden bg-white dark:bg-[#303030] rounded-tl-[1rem] shadow-[0_0_2px_0_theme(colors.black/0.08),_0_1px_2px_0_rgba(25,28,33,0.06),_0_0_0_1px_rgba(25,28,33,0.04)] md:p-8">
           {children}
         </div>
       </div>

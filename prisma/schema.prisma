@@ -99,10 +99,10 @@ model Unit {
 }
 
 enum TaskType {
-  SELECT
-  GAPS
-  MATCH
-  LISTEN
+  VOCMATCH
+  VOCINTRO
+  GAP
+  LISTENING
 }
 
 // = one task, like match the words
