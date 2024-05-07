@@ -63,7 +63,7 @@ const UnitComp = ({
             "px," +
             translateY +
             ")",
-          backgroundColor: lockStates[index] ? "#6c7478" : lesson.colorHex,
+          backgroundColor: lockStates[index] ? "#6c7478" : lesson.color1Hex,
         }}
         onClick={() => handleOnClick(unit)}
       >
@@ -75,6 +75,7 @@ const UnitComp = ({
             <div className="relative bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-2 rounded-xl shadow text-sm uppercase font-semibold">
               Click Here to Get Started
             </div>
+            <div className="text-[#ff0000]"></div>
           </div>
         )}
       </div>

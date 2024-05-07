@@ -75,7 +75,8 @@ model Lesson {
   description String @default("")
   image       String @default("")
   units       Unit[]
-  colorHex    String @default("#58cc02")
+  color1Hex   String @default("#58cc02")
+  color2Hex   String @default("#58cc02")
   courseId    String
   course      Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
 

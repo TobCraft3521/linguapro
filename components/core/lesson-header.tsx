@@ -14,9 +14,9 @@ const LessonsHeader = ({ lesson }: LessonsHeaderProps) => {
     )
   return (
     <div
-      className="absolute top-8 md:top-2 left-8 right-8 bg-black text-white py-4 px-6 rounded-xl md:rounded-2xl drop-shadow-xl z-20"
+      className="absolute top-8 md:top-2 left-8 right-8 bg-gradient-to-r from-blue-500 to-purple-500 text-white py-4 px-6 rounded-xl md:rounded-2xl drop-shadow-xl z-20"
       style={{
-        backgroundColor: lesson?.colorHex,
+        background: `linear-gradient(to right, ${lesson.color1Hex}, ${lesson.color2Hex})`,
       }}
     >
       <h1 className="text-lg font-semibold">
