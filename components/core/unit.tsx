@@ -4,6 +4,7 @@ import { LessonWithUnits } from "./path"
 import toast from "react-hot-toast"
 import { useState } from "react"
 import "./unit.css"
+import { redirect, useRouter } from "next/navigation"
 
 interface UnitProps {
   unit: Unit
@@ -27,6 +28,7 @@ const UnitComp = ({
   nextUnitIndex,
 }: UnitProps) => {
   const [isHovered, setIsHovered] = useState(false)
+  const router = useRouter()
 
   const handleOnClick = (unit: Unit) => {
     if (!isActiveLesson || unit.index !== nextUnitIndex) {
@@ -36,10 +38,11 @@ const UnitComp = ({
       })
       return
     } else {
-      toast.success("Unit completed!", {
+      toast.success("Entering challenge!", {
         id: "success",
         duration: 2000,
       })
+      router.push("/challenge")
     }
   }
 
@@ -72,9 +75,10 @@ const UnitComp = ({
       <div>
         {isActiveLesson && unit.index === nextUnitIndex && (
           <div className="absolute top-1/2 right-[-120%] transform translate-x-28 -translate-y-1/2 arrow">
-            <div className="relative bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-2 rounded-xl shadow text-sm uppercase font-semibold">
+            <div className="relative bg-gradient-to-r from-blue-500 to-purple-500 hover:animate-pulse text-white px-8 py-2 rounded-xl shadow text-xs uppercase font-semibold">
               Click Here to Get Started
             </div>
+
             <div className="text-[#ff0000]"></div>
           </div>
         )}
