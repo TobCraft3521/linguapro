@@ -30,7 +30,7 @@ const LessonComp = ({ lesson }: LessonCompProps) => {
       setNextUnitIndex(progress % 5)
     }
     fetchData()
-  }, [])
+  }, [lesson.index])
 
   return (
     <div className="lesson m-8 relative" data-lesson-id={lesson.id}>

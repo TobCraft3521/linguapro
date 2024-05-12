@@ -16,11 +16,9 @@ export type LessonWithUnits = Lesson & { units: Unit[] }
 const Path: React.FC<PathProps> = () => {
   const [lessons, setLessons] = useState<LessonWithUnits[] | null>(null)
   const [viewedLesson, setViewedLesson] = useState<Lesson | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const { lang } = useParams()
-  if (!lang || !((lang as string).toUpperCase() in Language)) return null
-
-  const containerRef = useRef<HTMLDivElement>(null)
 
   const handleScroll = () => {
     console.log("first")
@@ -76,6 +74,8 @@ const Path: React.FC<PathProps> = () => {
       if (!viewedLesson) setViewedLesson(dbLessons[0])
     })()
   }, [lang])
+
+  if (!lang || !((lang as string).toUpperCase() in Language)) return null
 
   if (!lessons)
     return (

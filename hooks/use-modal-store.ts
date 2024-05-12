@@ -1,8 +1,9 @@
+import { ConfirmModalData } from "@/components/modals/confirm-modal"
 import { create } from "zustand"
 
 export type ModalType = "confirm"
 
-interface ModalData {}
+interface ModalData extends ConfirmModalData {}
 
 interface ModalStore {
   type: ModalType | null

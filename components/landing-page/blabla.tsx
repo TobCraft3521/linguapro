@@ -14,7 +14,7 @@ const FullWidthSection = () => {
             Flueny: Elevate Your Language Skills with Ethan
           </h2>
           <p className="mt-4 text-xl text-gray-300">
-            With Flueny, your language skills grow alongside Ethan's life,
+            With Flueny, your language skills grow alongside Ethan&apos;s life,
             guiding you through a dynamic learning experience.
           </p>
         </div>

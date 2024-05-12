@@ -22,15 +22,15 @@ import {
 import React from "react"
 
 const flags = [
-  <US />,
-  <IT />,
-  <DE />,
-  <GB />,
-  <FR />,
-  <SE />,
-  <ES />,
-  <IN />,
-  <GR />,
+  <US key={0} />,
+  <IT key={1} />,
+  <DE key={2} />,
+  <GB key={3} />,
+  <FR key={4} />,
+  <SE key={5} />,
+  <ES key={6} />,
+  <IN key={7} />,
+  <GR key={8} />,
 ]
 
 const Flags = () => {

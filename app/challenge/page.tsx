@@ -1,23 +1,20 @@
-"use client"
 import ChallengeHeader from "@/components/challenge/challenge-header"
-import { useModal } from "@/hooks/use-modal-store"
-import { getProfileProgress } from "@/lib/profiles"
-import { X } from "lucide-react"
-import { useEffect, useState } from "react"
+import { mostRecentLang } from "@/lib/mostRecentLang"
 
-const Challenge = () => {
-  const [progress, setProgress] = useState(0)
-  const { onOpen } = useModal()
+const Challenge = async () => {
+  const mostRecentLanguage = await mostRecentLang()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setProgress((await getProfileProgress()) || 0)
-    }
-    fetchData()
-  }, [])
+  // TODO: Put elsewhere (in a client component child component)
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setProgress((await getProfileProgress()) || 0)
+  //   }
+  //   fetchData()
+  // }, [])
+
   return (
     <div className="h-screen w-screen">
-      <ChallengeHeader />
+      <ChallengeHeader mostRecentLang={mostRecentLanguage} />
     </div>
   )
 }

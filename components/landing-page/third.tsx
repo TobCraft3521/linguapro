@@ -1,3 +1,4 @@
+import Image from "next/image"
 import React from "react"
 
 const AdditionalInfoBlock = () => {
@@ -15,8 +16,8 @@ const AdditionalInfoBlock = () => {
               Why Choose Flueny?
             </h2>
             <p className="text-lg mb-4 text-white">
-              We offer a unique and engaging way to learn languages. Here's why
-              you should choose us:
+              We offer a unique and engaging way to learn languages. Here&apos;s
+              why you should choose us:
             </p>
             <ul className="list-disc ml-8 text-white">
               <li>Interactive gameplay makes learning fun and immersive</li>
@@ -24,17 +25,19 @@ const AdditionalInfoBlock = () => {
                 Curriculum tailored to different age groups ensures relevance
               </li>
               <li>
-                Track Ethan's progress as you advance in your language skills
+                Track Ethan&apos;s progress as you advance in your language
+                skills
               </li>
               <li>Unlock achievements and rewards as you learn</li>
               <li>Access to a vibrant community of learners</li>
             </ul>
           </div>
           <div className="md:w-1/2 md:pl-8">
-            <img
+            <Image
               src="/images/community.jpg"
               alt="Community"
               className="w-full rounded-lg"
+              fill
             />
           </div>
         </div>
