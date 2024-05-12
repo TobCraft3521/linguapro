@@ -1,4 +1,3 @@
-import Image from "next/image"
 import React from "react"
 
 const AdditionalInfoBlock = () => {
@@ -33,11 +32,10 @@ const AdditionalInfoBlock = () => {
             </ul>
           </div>
           <div className="md:w-1/2 md:pl-8">
-            <Image
+            <img
               src="/images/community.jpg"
               alt="Community"
               className="w-full rounded-lg"
-              fill
             />
           </div>
         </div>
