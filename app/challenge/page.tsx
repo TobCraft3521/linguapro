@@ -13,7 +13,13 @@ const Challenge = async () => {
   // }, [])
 
   return (
-    <div className="h-screen w-screen">
+    <div
+      className="h-screen"
+      style={{
+        width: "100vw",
+        overflowX: "hidden",
+      }}
+    >
       <ChallengeHeader mostRecentLang={mostRecentLanguage} />
     </div>
   )
