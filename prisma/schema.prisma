@@ -37,7 +37,13 @@ model Profile {
   coins      Int      @default(0)
   superCoins Int      @default(0)
   progress   Int      @default(0)
-  hearts     Int      @default(5)
+
+  // challenge session
+  challengeProgress Int      @default(0)
+  hearts            Int      @default(5)
+  startedAt         DateTime @default(now())
+
+  //
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -109,10 +115,12 @@ enum TaskType {
 
 // = one task, like match the words
 model Task {
-  id    String @id @default(uuid())
-  index Int
-  title String
-  type  String
+  id          String   @id @default(uuid())
+  index       Int
+  title       String
+  description String
+  type        TaskType
+  solution    String
 
   unitId String
   unit   Unit   @relation(fields: [unitId], references: [id], onDelete: Cascade)

@@ -4,6 +4,9 @@ import { mostRecentLang } from "@/lib/mostRecentLang"
 import { Language } from "@prisma/client"
 import { Heart, X } from "lucide-react"
 import { Progress } from "../ui/progress"
+import { getHeartsLeft } from "@/lib/challenge"
+import { useEffect, useState } from "react"
+import { get } from "http"
 
 interface ChallengeHeaderProps {
   mostRecentLang?: Language
@@ -11,6 +14,15 @@ interface ChallengeHeaderProps {
 
 const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
   const { onOpen } = useModal()
+  const [hearts, setHearts] = useState<number | undefined>(undefined)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setHearts(await getHeartsLeft())
+      console.log(await getHeartsLeft())
+    }
+    fetchData()
+  }, [])
 
   return (
     <div className="flex items-center justify-center max-w-[100vw]">
@@ -20,7 +32,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
             onOpen("confirm", {
               title: "Sure you want to cancel the challenge?",
               description:
-                "All progress will be lost when not completing the challenge.",
+                "All progress will be lost after the countdown ends when not completing the challenge.",
               variant: "danger",
               redirectUrl: "/dashboard/lang/" + mostRecentLang?.toLowerCase(),
             })
@@ -36,7 +48,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
         </div>
         <div className="flex flex-row justify-center items-center gap-2 font-bold">
           <Heart size={24} className="text-red-600" />
-          {/* WIP */}5
+          {hearts}
         </div>
       </div>
     </div>
