@@ -2,11 +2,11 @@ import {
   getHeartsLeft,
   decreaseHearts,
   queryChallengeSession,
-} from "./challenge"
-import { db } from "./db"
+} from "../challenge"
+import { db } from "../db"
 import { auth } from "@clerk/nextjs"
 import { cache } from "react"
-import { mostRecentLang } from "./mostRecentLang"
+import { mostRecentLang } from "../mostRecentLang"
 
 jest.mock("./db", () => ({
   db: {

@@ -78,6 +78,8 @@ export const queryChallengeSession = async () => {
       },
     })
   }
+
+  return challengeSession
 }
 
 const SESSION_DURATION = 60 // in seconds
