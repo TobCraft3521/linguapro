@@ -1,14 +1,9 @@
-import {
-  getHeartsLeft,
-  decreaseHearts,
-  queryChallengeSession,
-} from "../challenge"
-import { db } from "../db"
 import { auth } from "@clerk/nextjs"
-import { cache } from "react"
+import { getHeartsLeft } from "../challenge"
+import { db } from "../db"
 import { mostRecentLang } from "../mostRecentLang"
 
-jest.mock("./db", () => ({
+jest.mock("../db", () => ({
   db: {
     profile: {
       findFirst: jest.fn(),
@@ -26,7 +21,7 @@ jest.mock("react", () => ({
   cache: jest.fn((fn) => fn),
 }))
 
-jest.mock("./mostRecentLang", () => ({
+jest.mock("../mostRecentLang", () => ({
   mostRecentLang: jest.fn(),
 }))
 
