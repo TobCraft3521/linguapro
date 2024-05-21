@@ -1,11 +1,11 @@
 import Link from "next/link"
 
-const Flueny = () => {
+const LinguaPro = () => {
   return (
-    <span className="z-20">
+    <span className="z-20 inline-block">
       <Link
         href="/"
-        className="flex flex-row gap-2 justify-center items-center"
+        className="flex flex-row items-center justify-center gap-4"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -36,20 +36,15 @@ const Flueny = () => {
             strokeWidth="16"
           ></line>
         </svg>
-        <p className="cursor-pointer flex">
-          <span
-            className="uppercase text-2xl flex flex-1 justify-center items-center text-[#37afff]"
-            style={{
-              fontFamily: "Varela Round",
-              fontWeight: 950,
-            }}
-          >
-            FLUENY
+        <h1 className="flex cursor-pointer text-2xl font-bold">
+          Lingua
+          <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+            Pro
           </span>
-        </p>
+        </h1>
       </Link>
     </span>
   )
 }
 
-export default Flueny
+export default LinguaPro

@@ -62,7 +62,7 @@ const UnitComp = ({
         style={{
           transform:
             "translate(" +
-            pathOffset(lesson.index * 5 + unit.index, 10, 150) +
+            pathOffset(lesson.index * 6 + unit.index, 10, 150) +
             "px," +
             translateY +
             ")",
@@ -72,17 +72,14 @@ const UnitComp = ({
       >
         {unit.index + 1}
       </div>
-      <div>
-        {isActiveLesson && unit.index === nextUnitIndex && (
-          <div className="absolute top-1/2 right-[-120%] transform translate-x-28 -translate-y-1/2 arrow">
-            <div className="relative bg-gradient-to-r from-blue-500 to-purple-500 hover:animate-pulse text-white px-8 py-2 rounded-xl shadow text-xs uppercase font-semibold">
-              Click Here to Get Started
-            </div>
 
-            <div className="text-[#ff0000]"></div>
+      {isActiveLesson && unit.index === nextUnitIndex && (
+        <div className="absolute top-[-2rem] arrow animate-bounce">
+          <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-1 rounded-lg shadow text-sm uppercase font-semibold text-center">
+            Start
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

@@ -35,14 +35,13 @@ export const initUser = async () => {
 export const activeProfile = async () => {
   const { userId } = auth()
   if (!userId) return null
-  const dbUser = await activeUser()
-  if (!dbUser) return
-  const mostRecentLanguage = await mostRecentLang()
-  if (!mostRecentLanguage) return
+
   const profile = await db.profile.findFirst({
     where: {
-      userId: dbUser.id,
-      language: mostRecentLanguage,
+      user: {
+        userId,
+      },
+      language: await mostRecentLang(),
     },
   })
   return profile

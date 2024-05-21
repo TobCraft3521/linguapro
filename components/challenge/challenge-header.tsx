@@ -1,12 +1,10 @@
 "use client"
 import { useModal } from "@/hooks/use-modal-store"
-import { mostRecentLang } from "@/lib/mostRecentLang"
-import { Language } from "@prisma/client"
-import { Heart, X } from "lucide-react"
-import { Progress } from "../ui/progress"
 import { getHeartsLeft } from "@/lib/challenge"
+import { Language } from "@prisma/client"
+import { Heart, Loader2, X } from "lucide-react"
 import { useEffect, useState } from "react"
-import { get } from "http"
+import { Progress } from "../ui/progress"
 
 interface ChallengeHeaderProps {
   mostRecentLang?: Language
@@ -48,7 +46,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
         </div>
         <div className="flex flex-row justify-center items-center gap-2 font-bold">
           <Heart size={24} className="text-red-600" />
-          {hearts}
+          {hearts || <Loader2 className="text-black animate-spin" size={18} />}
         </div>
       </div>
     </div>

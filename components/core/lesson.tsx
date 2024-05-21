@@ -34,9 +34,9 @@ const LessonComp = ({ lesson }: LessonCompProps) => {
 
   return (
     <div className="lesson m-8 relative" data-lesson-id={lesson.id}>
-      <div className="items-center flex my-8">
+      <div className="items-center flex my-16">
         <hr className="basis-[48px] flex-grow dark:border-t-[1px] border-t-[2px] border-0 dark:border-white" />
-        <h1 className="mx-[16px] text-center font-semibold">
+        <h1 className="mx-[16px] text-center font-semibold text-lg">
           Lesson: {lesson.index + 1} - {lesson.title}
         </h1>
         <hr className="basis-[48px] flex-grow dark:border-t-[1px] border-t-[2px] border-0 dark:border-white" />

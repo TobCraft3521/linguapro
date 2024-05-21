@@ -1,7 +1,7 @@
 import { mostRecentLang } from "@/lib/mostRecentLang"
 import { cn } from "@/lib/utils"
 import { Home, Languages, Settings, User } from "lucide-react"
-import Flueny from "../header/flueny-logo"
+import LinguaPro from "../header/linguapro-logo"
 import Tab from "./tab"
 import UserCard from "./user-avatar"
 import { Separator } from "../ui/separator"
@@ -35,18 +35,20 @@ const Sidebar = async ({ className }: { className: string }) => {
   return (
     <div
       className={cn(
-        "w-[75vw] flex-col gap-8 mt-8 lg:mt-0 h-[90vh] lg:h-[100vh] lg:flex-1 flex sm:max-w-xs max-w-xs pr-8 lg:p-8 lg:pb-6 z-10",
-        className
+        "z-10 mt-8 flex h-[90vh] w-[75vw] max-w-xs flex-col gap-8 pr-8 sm:max-w-xs lg:mt-0 lg:h-[100vh] lg:flex-1 lg:p-8 lg:pb-6",
+        className,
       )}
     >
       <div className="space-y-8">
-        <Flueny />
+        <div className="ml-8">
+          <LinguaPro />
+        </div>
         <div className="w-full">
-          <h1 className="ml-4 text-zinc-500 text-md font-bold uppercase">
+          <h1 className="text-md ml-4 font-bold uppercase text-zinc-500">
             Dashboard
           </h1>
           <Separator className="m-1 mb-3" />
-          <div className="flex gap-1 flex-col">
+          <div className="flex flex-col gap-1">
             {tabs.map((tab, index) => (
               <Tab tab={tab} key={index} />
             ))}

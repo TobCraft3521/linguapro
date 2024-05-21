@@ -5,6 +5,7 @@ import { cache } from "react"
 import { auth } from "@clerk/nextjs"
 import { mostRecentLang } from "./mostRecentLang"
 import { start } from "repl"
+import { getProfileProgress } from "./profiles"
 
 export const getHeartsLeft = cache(async () => {
   const { userId } = auth()
@@ -62,10 +63,7 @@ export const queryChallengeSession = async () => {
     progress: profile?.challengeProgress,
   }
 
-  if (
-    challengeSession.startedAt.getTime() + SESSION_DURATION * 1000 <
-    Date.now()
-  ) {
+  if (challengeSession.startedAt.getTime() + 1 * 1000 < Date.now()) {
     // expired: reset session
     await db.profile.update({
       where: {
@@ -82,4 +80,32 @@ export const queryChallengeSession = async () => {
   return challengeSession
 }
 
-const SESSION_DURATION = 60 // in seconds
+export const queryChallengeTime = async () => {
+  const { userId } = auth()
+  if (!userId) return
+  const mostRecentLanguage = await mostRecentLang()
+  const profile = await db.profile.findFirst({
+    where: {
+      user: {
+        userId,
+      },
+      language: mostRecentLanguage,
+    },
+  })
+  if (!profile) return
+  const activeLesson = Math.floor(profile.progress / 5)
+  const activeUnit = profile.progress % 5
+  return (
+    await db.lesson.findFirst({
+      where: {
+        course: {
+          language: mostRecentLanguage,
+        },
+        index: activeLesson,
+      },
+      include: {
+        units: true,
+      },
+    })
+  )?.units[activeUnit].time
+}

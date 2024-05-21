@@ -38,7 +38,7 @@ const Flags = () => {
     Autoplay({ delay: 2000, stopOnInteraction: true })
   )
   return (
-    <div className="w-full flex justify-center items-center mb-16">
+    <div className="w-full flex justify-center items-center mb-16 z-20">
       <Carousel
         opts={{ loop: true, align: "center" }}
         plugins={[plugin.current]}

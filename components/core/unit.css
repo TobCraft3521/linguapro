@@ -5,7 +5,8 @@
   height: 10px; /* Adjust size as needed */
   background-color: #3b82f6; /* Adjust color as needed */
   transform: rotate(45deg); /* Rotate the square by 45 degrees */
-  top: 50%;
-  left: -5px; /* Adjust distance from the left of the container */
-  margin-top: -5px; /* Center the square vertically */
+  bottom: -5px;
+  left: 50%; /* Adjust distance from the left of the container */
+  margin-left: -5px; /* Center the square horizontally */
+  z-index: -1;
 }

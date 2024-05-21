@@ -96,6 +96,7 @@ model Unit {
   id    String @id @default(uuid())
   index Int
   title String
+  time  Int    @default(60) // in seconds
 
   tasks Task[]
 

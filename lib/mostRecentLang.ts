@@ -3,6 +3,7 @@ import { auth } from "@clerk/nextjs"
 import { db } from "./db"
 import { Language } from "@prisma/client"
 
+// you could improve performance by not querying the profile if already queried elsewhere
 export const mostRecentLang = async () => {
   const { userId } = auth()
   if (!userId) return
