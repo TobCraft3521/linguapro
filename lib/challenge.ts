@@ -5,19 +5,12 @@ import { cache } from "react"
 import { auth } from "@clerk/nextjs"
 import { mostRecentLang } from "./mostRecentLang"
 import { start } from "repl"
-import { getProfileProgress } from "./profiles"
+import { getProfileProgress, queryActiveProfile } from "./profiles"
+import { profile } from "console"
+import exp from "constants"
 
 export const decreaseHearts = async () => {
-  const { userId } = auth()
-  if (!userId) return
-  const profile = await db.profile.findFirst({
-    where: {
-      user: {
-        userId,
-      },
-      language: await mostRecentLang(),
-    },
-  })
+  const profile = await queryActiveProfile()
   if (!profile) return
   await db.profile.update({
     where: {
@@ -30,16 +23,7 @@ export const decreaseHearts = async () => {
 }
 
 export const queryChallengeSession = async () => {
-  const { userId } = auth()
-  if (!userId) return
-  const profile = await db.profile.findFirst({
-    where: {
-      user: {
-        userId,
-      },
-      language: await mostRecentLang(),
-    },
-  })
+  const profile = await queryActiveProfile()
   if (!profile) return
   const challengeSession = {
     hearts: profile?.hearts,
@@ -75,17 +59,7 @@ export const queryChallengeSession = async () => {
 }
 
 export const queryChallengeTime = async () => {
-  const { userId } = auth()
-  if (!userId) return
-  const mostRecentLanguage = await mostRecentLang()
-  const profile = await db.profile.findFirst({
-    where: {
-      user: {
-        userId,
-      },
-      language: mostRecentLanguage,
-    },
-  })
+  const profile = await queryActiveProfile()
   if (!profile) return
   const activeLesson = Math.floor(profile.progress / 5)
   const activeUnit = profile.progress % 5
@@ -94,7 +68,7 @@ export const queryChallengeTime = async () => {
     await db.lesson.findFirst({
       where: {
         course: {
-          language: mostRecentLanguage,
+          language: profile.language,
         },
         index: activeLesson,
       },
@@ -110,24 +84,15 @@ export const queryChallengeTime = async () => {
 }
 
 export const checkSolution = async (solution: String) => {
-  const { userId } = auth()
-  if (!userId) return
-  const mostRecentLanguage = await mostRecentLang()
-  const profile = await db.profile.findFirst({
-    where: {
-      user: {
-        userId,
-      },
-      language: mostRecentLanguage,
-    },
-  })
+  const profile = await queryActiveProfile()
   if (!profile) return
+  if (await isChallengeSessionExpired()) return { right: false, expired: true }
   const activeLesson = Math.floor(profile.progress / 5)
   const activeUnit = profile.progress % 5
   const lesson = await db.lesson.findFirst({
     where: {
       course: {
-        language: mostRecentLanguage,
+        language: profile.language,
       },
       index: activeLesson,
     },
@@ -158,5 +123,53 @@ export const checkSolution = async (solution: String) => {
 
   return {
     right,
+    expired: false,
   }
+}
+
+export const queryTasks = async () => {
+  const profile = await queryActiveProfile()
+  if (!profile) return
+  const activeLesson = Math.floor(profile.progress / 5)
+  const activeUnit = profile.progress % 5
+  const lesson = await db.lesson.findFirst({
+    where: {
+      course: {
+        language: profile.language,
+      },
+      index: activeLesson,
+    },
+    include: {
+      units: {
+        include: {
+          tasks: true,
+        },
+      },
+    },
+  })
+  if (!lesson) return
+  const unit = lesson.units[activeUnit]
+  return unit.tasks
+}
+
+export const resetChallengeSession = async () => {
+  const profile = await queryActiveProfile()
+  if (!profile) return
+  await db.profile.update({
+    where: {
+      id: profile.id,
+    },
+    data: {
+      challengeProgress: 0,
+      startedAt: new Date(),
+      hearts: 5,
+    },
+  })
+}
+
+export const isChallengeSessionExpired = async () => {
+  const profile = await queryActiveProfile()
+  if (!profile) return
+  const timeLimit = await queryChallengeTime()
+  return profile.startedAt.getTime() + (timeLimit || 0) * 1000 < Date.now()
 }

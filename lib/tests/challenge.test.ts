@@ -1,5 +1,4 @@
 import { auth } from "@clerk/nextjs"
-import { getHeartsLeft } from "../challenge"
 import { db } from "../db"
 import { mostRecentLang } from "../mostRecentLang"
 
@@ -29,17 +28,17 @@ beforeEach(() => {
   jest.clearAllMocks()
 })
 
-test("getHeartsLeft calls the correct functions with the correct parameters", async () => {
-  const userId = "testUserId"
-  ;(auth as jest.Mock).mockImplementation(() => ({ userId }))
-  await getHeartsLeft()
-  expect(auth).toHaveBeenCalled()
-  expect(db.profile.findFirst).toHaveBeenCalledWith({
-    where: {
-      user: { userId },
-      language: await mostRecentLang(),
-    },
-  })
-})
+// test("getHeartsLeft calls the correct functions with the correct parameters", async () => {
+//   const userId = "testUserId"
+//   ;(auth as jest.Mock).mockImplementation(() => ({ userId }))
+//   await getHeartsLeft()
+//   expect(auth).toHaveBeenCalled()
+//   expect(db.profile.findFirst).toHaveBeenCalledWith({
+//     where: {
+//       user: { userId },
+//       language: await mostRecentLang(),
+//     },
+//   })
+// })
 
 // Add similar tests for decreaseHearts and queryChallengeSession

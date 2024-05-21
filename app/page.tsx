@@ -10,13 +10,18 @@ import { BackgroundBoxesDemo } from "@/components/landing-page/background-boxes"
 import Hero from "@/components/landing-page/hero"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import Pricing from "@/components/landing-page/pricing"
+import { ChevronsDown } from "lucide-react"
+import ScrollHint from "@/components/landing-page/scroll-hint"
 
 export default function App() {
   return (
     <ScrollArea className="h-screen w-full">
-      <Hero />
-      <FullWidthSection />
-      <Pricing />
+      <div className="relative">
+        <Hero />
+        <FullWidthSection />
+        <Pricing />
+        <ScrollHint />
+      </div>
     </ScrollArea>
   )
 }

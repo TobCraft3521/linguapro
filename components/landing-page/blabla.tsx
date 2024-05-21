@@ -23,8 +23,8 @@ const Features = () => {
         </div>
         <div className="space-y-8 md:grid md:grid-cols-2 md:gap-12 md:space-y-0 lg:grid-cols-3">
           <div>
-            <div className="mb-4 flex h-10  w-10 items-center justify-center lg:h-12 lg:w-12">
-              <Hand className="text-gray-500" />
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 transition-all hover:bg-gray-600 lg:h-12 lg:w-12">
+              <Hand className="text-white" />
             </div>
             <h3 className="mb-2 text-xl font-bold dark:text-white">
               Interactivity
@@ -35,8 +35,8 @@ const Features = () => {
             </p>
           </div>
           <div>
-            <div className="mb-4 flex h-10  w-10 items-center justify-center lg:h-12 lg:w-12">
-              <ChevronsUp className="text-gray-500" />
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 transition-all hover:bg-gray-600 lg:h-12 lg:w-12">
+              <ChevronsUp className="text-white" />
             </div>
             <h3 className="mb-2 text-xl font-bold dark:text-white">Speed</h3>
             <p className="text-gray-500 dark:text-gray-400">
@@ -44,8 +44,8 @@ const Features = () => {
             </p>
           </div>
           <div>
-            <div className="mb-4 flex h-10  w-10 items-center justify-center lg:h-12 lg:w-12">
-              <ArrowBigUpDash className="text-gray-500" />
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 transition-all hover:bg-gray-600 lg:h-12 lg:w-12">
+              <ArrowBigUpDash className="text-white" />
             </div>
             <h3 className="mb-2 text-xl font-bold dark:text-white">
               Progress Tracking
@@ -55,8 +55,8 @@ const Features = () => {
             </p>
           </div>
           <div>
-            <div className="mb-4 flex h-10  w-10 items-center justify-center lg:h-12 lg:w-12">
-              <Volume2 className="text-gray-500" />
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 transition-all hover:bg-gray-600 lg:h-12 lg:w-12">
+              <Volume2 className="text-white" />
             </div>
             <h3 className="mb-2 text-xl font-bold dark:text-white">
               Hear the language
@@ -67,8 +67,8 @@ const Features = () => {
             </p>
           </div>
           <div>
-            <div className="mb-4 flex h-10  w-10 items-center justify-center lg:h-12 lg:w-12">
-              <SwatchBook className="text-gray-500" />
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 transition-all hover:bg-gray-600 lg:h-12 lg:w-12">
+              <SwatchBook className="text-white" />
             </div>
             <h3 className="mb-2 text-xl font-bold dark:text-white">
               Variation
@@ -78,8 +78,8 @@ const Features = () => {
             </p>
           </div>
           <div>
-            <div className="mb-4 flex h-10  w-10 items-center justify-center lg:h-12 lg:w-12">
-              <Infinity className="text-gray-500" />
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-gray-800 transition-all hover:bg-gray-600 lg:h-12 lg:w-12">
+              <Infinity className="text-white" />
             </div>
             <h3 className="mb-2 text-xl font-bold dark:text-white">
               Endless Content

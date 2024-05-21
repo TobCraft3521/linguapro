@@ -84,3 +84,16 @@ export const getLessonLockStates = async (lesson: number) => {
   }
   return lockStates
 }
+
+export const queryActiveProfile = async () => {
+  const { userId } = auth()
+  if (!userId) return
+  return db.profile.findFirst({
+    where: {
+      user: {
+        userId,
+      },
+      language: await mostRecentLang(),
+    },
+  })
+}
