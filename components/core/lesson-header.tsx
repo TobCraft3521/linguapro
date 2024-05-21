@@ -8,13 +8,13 @@ interface LessonsHeaderProps {
 const LessonsHeader = ({ lesson }: LessonsHeaderProps) => {
   if (!lesson)
     return (
-      <div className="absolute flex items-center justify-center top-10 left-8 right-8 bg-slate-500 text-white py-4 px-6 rounded-xl md:rounded-2xl animate-pulse">
+      <div className="absolute left-8 right-8 top-10 flex animate-pulse items-center justify-center rounded-xl bg-slate-500 px-6 py-4 text-white md:rounded-2xl">
         <Loader2 className="animate-spin" />
       </div>
     )
   return (
     <div
-      className="absolute top-8 md:top-2 left-8 right-8 bg-gradient-to-r from-blue-500 to-purple-500 text-white py-4 px-6 rounded-xl md:rounded-2xl drop-shadow-xl z-20"
+      className="absolute left-8 right-8 top-8 z-20 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-4 text-white drop-shadow-xl md:top-2 md:rounded-2xl"
       style={{
         background: `linear-gradient(to right, ${lesson.color1Hex}, ${lesson.color2Hex})`,
       }}

@@ -33,15 +33,15 @@ const LessonComp = ({ lesson }: LessonCompProps) => {
   }, [lesson.index])
 
   return (
-    <div className="lesson m-8 relative" data-lesson-id={lesson.id}>
-      <div className="items-center flex my-16">
-        <hr className="basis-[48px] flex-grow dark:border-t-[1px] border-t-[2px] border-0 dark:border-white" />
-        <h1 className="mx-[16px] text-center font-semibold text-lg">
+    <div className="lesson relative m-8" data-lesson-id={lesson.id}>
+      <div className="my-16 flex items-center">
+        <hr className="flex-grow basis-[48px] border-0 border-t-[2px] dark:border-t-[1px] dark:border-white" />
+        <h1 className="mx-[16px] text-center text-lg font-semibold">
           Lesson: {lesson.index + 1} - {lesson.title}
         </h1>
-        <hr className="basis-[48px] flex-grow dark:border-t-[1px] border-t-[2px] border-0 dark:border-white" />
+        <hr className="flex-grow basis-[48px] border-0 border-t-[2px] dark:border-t-[1px] dark:border-white" />
       </div>
-      <div className="flex flex-1 flex-col items-center justify-center gap-6">
+      <div className="flex flex-1 flex-col items-center justify-center gap-8">
         {/* Await the lockStates within the map function */}
         {lesson.units.map((unit: Unit, index: number) => (
           <UnitComp
@@ -58,8 +58,8 @@ const LessonComp = ({ lesson }: LessonCompProps) => {
       <div
         className="absolute top-[45%]"
         style={{
-          left: side ? "10vw" : "",
-          right: side ? "" : "10vw",
+          left: side ? "7vw" : "",
+          right: side ? "" : "7vw",
         }}
       >
         {lesson.image !== "" && (

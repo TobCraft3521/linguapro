@@ -6,19 +6,17 @@ import { Button } from "@/components/ui/button"
 import People from "@/public/imgs/people.png"
 import Image from "next/image"
 import Link from "next/link"
-import IntroductionBlock from "@/components/landing-page/intro"
-import AdditionalInfoBlock from "@/components/landing-page/third"
 import { BackgroundBoxesDemo } from "@/components/landing-page/background-boxes"
 import Hero from "@/components/landing-page/hero"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import Pricing from "@/components/landing-page/pricing"
 
 export default function App() {
   return (
     <ScrollArea className="h-screen w-full">
       <Hero />
-      <IntroductionBlock />
       <FullWidthSection />
-      <AdditionalInfoBlock />
+      <Pricing />
     </ScrollArea>
   )
 }

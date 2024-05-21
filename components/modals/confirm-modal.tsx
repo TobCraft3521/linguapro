@@ -19,6 +19,9 @@ export interface ConfirmModalData {
 const ConfirmModal = () => {
   const { isOpen, onClose, type, data } = useModal()
   const router = useRouter()
+
+  const isModalOpen = isOpen && type === "confirm"
+
   const handleClose = () => {
     onClose()
   }
@@ -28,16 +31,17 @@ const ConfirmModal = () => {
       router.push(data.redirectUrl)
     }
   }
+
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
+    <Dialog open={isModalOpen} onOpenChange={handleClose}>
       <DialogContent>
         <DialogHeader>{data.title}</DialogHeader>
         <DialogDescription>{data.description}</DialogDescription>
-        <div className="flex flex-row justify-between mt-4">
+        <div className="mt-4 flex flex-row justify-between">
           <Button onClick={handleClose} variant="outline">
             Cancel
           </Button>
-          <Button onClick={handleConfirm} variant={data.variant || "default"}>
+          <Button onClick={handleConfirm} variant={data.variant || "super"}>
             Confirm
           </Button>
         </div>

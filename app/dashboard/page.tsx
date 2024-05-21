@@ -1,4 +1,5 @@
 import LanguageCard from "@/components/global/language-card"
+import { ScrollArea } from "@/components/ui/scroll-area"
 import { initUser } from "@/lib/profiles"
 import { auth, redirectToSignUp } from "@clerk/nextjs"
 import { DE, ES, FR, IT } from "country-flag-icons/react/3x2"
@@ -34,27 +35,29 @@ const Dashboard = async ({}: DashboardProps) => {
   const user = await initUser()
 
   return (
-    <div className="bg-gray-0 h-[100vh] flex flex-1 flex-col p-8">
-      <div>
-        <h1 className="text-2xl font-semibold text-center mt-8">
-          Welcome{" "}
-          <span className="bg-gradient-to-r inline-block from-[#7F00FF] to-[#E100FF] text-transparent bg-clip-text">
-            {user?.userName}
-          </span>
-          !
-          <br />
-          Select a language to get started.
-        </h1>
-        <p className="text-center font-light text-slate-400">
-          Don&apos;t worry, you can always learn other languages later.
-        </p>
-      </div>
+    <div className="bg-gray-0 flex h-[100vh] flex-1 flex-col md:p-8">
+      <ScrollArea className="p-4 md:p-0">
+        <div>
+          <h1 className="mt-8 text-center text-2xl font-semibold">
+            Welcome{" "}
+            <span className="inline-block bg-gradient-to-r from-[#7F00FF] to-[#E100FF] bg-clip-text text-transparent">
+              {user?.userName}
+            </span>
+            !
+            <br />
+            Select a language to get started.
+          </h1>
+          <p className="text-center font-light text-slate-400">
+            Don&apos;t worry, you can always learn other languages later.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 w-full gap-4 py-16 md:p-16">
-        {languages.map((language, index) => (
-          <LanguageCard language={language} key={index} />
-        ))}
-      </div>
+        <div className="grid w-full grid-cols-2 gap-4 py-16 md:grid-cols-3 md:p-16 xl:grid-cols-4">
+          {languages.map((language, index) => (
+            <LanguageCard language={language} key={index} />
+          ))}
+        </div>
+      </ScrollArea>
     </div>
   )
 }

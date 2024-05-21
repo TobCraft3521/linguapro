@@ -67,7 +67,7 @@ const Path: React.FC<PathProps> = () => {
   useEffect(() => {
     ;(async () => {
       const dbLessons = await getLessonsByCourse(
-        (lang as string).toUpperCase() as Language
+        (lang as string).toUpperCase() as Language,
       )
       setLessons(dbLessons)
       //console.log(lessons)
@@ -79,10 +79,10 @@ const Path: React.FC<PathProps> = () => {
 
   if (!lessons)
     return (
-      <div className="flex flex-1 left-0 relative">
+      <div className="relative left-0 flex flex-1">
         <LessonsHeader lesson={viewedLesson} />
         <div
-          className="flex flex-col items-center justify-center text-center flex-1 text-lg text-neutral-500 dark:text-neutral-400 font-bold animate-spin"
+          className="flex flex-1 animate-spin flex-col items-center justify-center text-center text-lg font-bold text-neutral-500 dark:text-neutral-400"
           ref={containerRef}
         >
           <Loader2 size={32} />
@@ -92,14 +92,14 @@ const Path: React.FC<PathProps> = () => {
 
   if (lessons?.length === 0)
     return (
-      <div className="flex flex-1 left-0 relative">
+      <div className="relative left-0 flex flex-1">
         <LessonsHeader lesson={viewedLesson} />
         <div
-          className="flex flex-col items-center justify-center text-center flex-1 text-lg text-neutral-500 dark:text-neutral-400 font-bold"
+          className="flex flex-1 flex-col items-center justify-center text-center text-lg font-bold text-neutral-500 dark:text-neutral-400"
           ref={containerRef}
         >
           Whoopsy! No lessons found.
-          <Link href="/dashboard" className="flex flex-row items-center mt-2">
+          <Link href="/dashboard" className="mt-2 flex flex-row items-center">
             <ChevronLeft /> Back to Courses
           </Link>
         </div>
@@ -107,10 +107,10 @@ const Path: React.FC<PathProps> = () => {
     )
 
   return (
-    <div className="flex flex-1 left-0 relative">
+    <div className="relative left-0 flex flex-1">
       <LessonsHeader lesson={viewedLesson} />
       <ScrollArea
-        className="overflow-y-auto overflow-x-hidden flex-1 pt-36 md:pt-24"
+        className="flex-1 overflow-y-auto overflow-x-hidden pt-36 md:pt-24"
         ref={containerRef}
       >
         {lessons?.map((lesson) => (

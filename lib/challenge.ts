@@ -7,21 +7,6 @@ import { mostRecentLang } from "./mostRecentLang"
 import { start } from "repl"
 import { getProfileProgress } from "./profiles"
 
-export const getHeartsLeft = cache(async () => {
-  const { userId } = auth()
-  if (!userId) return
-  return (
-    await db.profile.findFirst({
-      where: {
-        user: {
-          userId,
-        },
-        language: await mostRecentLang(),
-      },
-    })
-  )?.hearts
-})
-
 export const decreaseHearts = async () => {
   const { userId } = auth()
   if (!userId) return
@@ -61,9 +46,14 @@ export const queryChallengeSession = async () => {
     language: profile?.language,
     startedAt: profile?.startedAt,
     progress: profile?.challengeProgress,
+    timeLimit: await queryChallengeTime(),
   }
 
-  if (challengeSession.startedAt.getTime() + 1 * 1000 < Date.now()) {
+  if (
+    challengeSession.startedAt.getTime() +
+      (challengeSession.timeLimit || 0) * 1000 <
+    Date.now()
+  ) {
     // expired: reset session
     await db.profile.update({
       where: {
@@ -75,6 +65,10 @@ export const queryChallengeSession = async () => {
         hearts: 5,
       },
     })
+
+    challengeSession.hearts = 5
+    challengeSession.startedAt = new Date()
+    challengeSession.progress = 0
   }
 
   return challengeSession
@@ -95,6 +89,7 @@ export const queryChallengeTime = async () => {
   if (!profile) return
   const activeLesson = Math.floor(profile.progress / 5)
   const activeUnit = profile.progress % 5
+
   return (
     await db.lesson.findFirst({
       where: {
@@ -104,8 +99,64 @@ export const queryChallengeTime = async () => {
         index: activeLesson,
       },
       include: {
-        units: true,
+        units: {
+          orderBy: {
+            index: "asc",
+          },
+        },
       },
     })
-  )?.units[activeUnit].time
+  )?.units[activeUnit].timeLimit
+}
+
+export const checkSolution = async (solution: String) => {
+  const { userId } = auth()
+  if (!userId) return
+  const mostRecentLanguage = await mostRecentLang()
+  const profile = await db.profile.findFirst({
+    where: {
+      user: {
+        userId,
+      },
+      language: mostRecentLanguage,
+    },
+  })
+  if (!profile) return
+  const activeLesson = Math.floor(profile.progress / 5)
+  const activeUnit = profile.progress % 5
+  const lesson = await db.lesson.findFirst({
+    where: {
+      course: {
+        language: mostRecentLanguage,
+      },
+      index: activeLesson,
+    },
+    include: {
+      units: {
+        include: {
+          tasks: true,
+        },
+      },
+    },
+  })
+  if (!lesson) return
+  const unit = lesson.units[activeUnit]
+  const task = unit.tasks[profile.challengeProgress]
+  const right = task.solution === solution
+  if (right) {
+    await db.profile.update({
+      where: {
+        id: profile.id,
+      },
+      data: {
+        progress: profile.progress + 1,
+      },
+    })
+  } else {
+    await decreaseHearts()
+  }
+
+  return {
+    right,
+  }
 }
