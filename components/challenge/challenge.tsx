@@ -16,7 +16,8 @@ const ChallengeBody = ({
   isLoading,
   activeTaskIndex,
 }: ChallengeBodyProps) => {
-  const { refresh } = useContext(ChallengeSessionContext) || {}
+  const { refresh, end, clickedNext } =
+    useContext(ChallengeSessionContext) || {}
   const [reload, setReload] = useState(false)
   useEffect(() => {
     setReload(!reload)
@@ -30,7 +31,11 @@ const ChallengeBody = ({
           </div>
         ) : (
           <div>
-            <Task task={tasks[activeTaskIndex]} />
+            {end && clickedNext ? (
+              <div>End</div>
+            ) : (
+              <Task task={tasks[activeTaskIndex]} />
+            )}
           </div>
         )}
       </div>

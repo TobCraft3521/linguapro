@@ -21,8 +21,15 @@ const Challenge = () => {
   const [tasks, setTasks] = useState<ClientTask[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [activeTaskIndex, setActiveTaskIndex] = useState(0)
-  const { attempt, refresh, setAttempt, response, setResponse } =
-    useContext(ChallengeSessionContext) || {}
+  const {
+    attempt,
+    refresh,
+    setAttempt,
+    response,
+    setResponse,
+    end,
+    clickedNext,
+  } = useContext(ChallengeSessionContext) || {}
 
   const footerState = response ? response : attempt ? "check" : "inactive"
   useEffect(() => {
@@ -48,9 +55,11 @@ const Challenge = () => {
         activeTaskIndex={activeTaskIndex}
         isLoading={isLoading}
       />
-      <ChallengeFooter
-        state={footerState as "check" | "inactive" | "wrong" | "correct"}
-      />
+      {(!end || !clickedNext) && (
+        <ChallengeFooter
+          state={footerState as "check" | "inactive" | "wrong" | "correct"}
+        />
+      )}
     </div>
   )
 }

@@ -1,13 +1,6 @@
 "use server"
-import { Language, Task } from "@prisma/client"
 import { db } from "./db"
-import { cache } from "react"
-import { auth } from "@clerk/nextjs"
-import { mostRecentLang } from "./mostRecentLang"
-import { start } from "repl"
-import { getProfileProgress, queryActiveProfile } from "./profiles"
-import { profile } from "console"
-import exp from "constants"
+import { queryActiveProfile } from "./profiles"
 
 export const decreaseHearts = async () => {
   const profile = await queryActiveProfile()

@@ -24,16 +24,20 @@ const ChallengeFooter = ({ state }: ChallengeFooterProps) => {
     setAttempt,
     setResponse,
     refresh,
+    setEnd,
+    setClickedNext,
   } = useContext(ChallengeSessionContext) || {
     attempt: "",
     setResponse: () => {},
     setAttempt: () => {},
     triggerRefresh: () => {},
     triggerRefreshHearts: () => {},
+    setEnd: () => {},
+    setClickedNext: () => {},
   }
   const handleCheck = async () => {
     setLoading(true)
-    const { right } = (await checkSolution(attempt || "")) || {}
+    const { right, end, expired } = (await checkSolution(attempt || "")) || {}
     if (right) {
       correctControls.play()
     } else {
@@ -41,6 +45,8 @@ const ChallengeFooter = ({ state }: ChallengeFooterProps) => {
     }
     setResponse(right ? "correct" : "wrong")
     setLoading(false)
+    setEnd(end || false)
+    setClickedNext(false)
     triggerRefreshHearts()
   }
 
@@ -52,6 +58,7 @@ const ChallengeFooter = ({ state }: ChallengeFooterProps) => {
   const handleNext = () => {
     setResponse("")
     setAttempt("")
+    setClickedNext(true)
     triggerRefresh()
   }
 

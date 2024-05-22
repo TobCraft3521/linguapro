@@ -11,6 +11,10 @@ type ContextProps = {
   setAttempt: React.Dispatch<React.SetStateAction<string>>
   response: string
   setResponse: React.Dispatch<React.SetStateAction<string>>
+  end: boolean
+  setEnd: React.Dispatch<React.SetStateAction<boolean>>
+  clickedNext: boolean
+  setClickedNext: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export const ChallengeSessionContext = createContext<ContextProps | null>(null)
@@ -24,6 +28,8 @@ export const ChallengeSessionProvider = ({
   const [refreshHearts, setRefreshHearts] = useState(false)
   const [attempt, setAttempt] = useState("")
   const [response, setResponse] = useState("")
+  const [end, setEnd] = useState(false)
+  const [clickedNext, setClickedNext] = useState(false)
   const { onClose } = useModal()
 
   const triggerRefresh = () => {
@@ -44,6 +50,10 @@ export const ChallengeSessionProvider = ({
     setResponse,
     refreshHearts,
     triggerRefreshHearts,
+    end,
+    setEnd,
+    clickedNext,
+    setClickedNext,
   }
 
   return (
