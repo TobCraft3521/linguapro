@@ -17,7 +17,7 @@ const Pricing = () => {
 
   return (
     <div
-      className="bg-white px-8 py-32 text-gray-900 dark:bg-black dark:text-white"
+      className="bg-white py-32 text-gray-900 dark:bg-black dark:text-white"
       //   style={{
       //     backgroundImage: "url('/imgs/backgrounds/pricingbg.png')",
       //     backgroundSize: "cover",
@@ -30,7 +30,7 @@ const Pricing = () => {
       </h2>
       <div className="flex flex-col items-center justify-center gap-8 md:flex-row">
         {/* Free Card */}
-        <div className="min-h-[430px] w-full rounded-2xl border border-gray-300 bg-white p-6 drop-shadow-2xl dark:border-gray-800 dark:bg-gray-800 md:w-1/5">
+        <div className="min-h-[430px] w-full min-w-[300px] rounded-2xl border border-gray-300 bg-white p-6 drop-shadow-2xl dark:border-gray-800 dark:bg-gray-800 md:w-1/5">
           <h3 className="text mb-4 inline-block rounded-full border border-gray-500 px-4 py-1 font-semibold">
             Limited
           </h3>
@@ -62,8 +62,8 @@ const Pricing = () => {
         </div>
 
         {/* Paid Tier Card */}
-        <div className="relative min-h-[430px] w-full rounded-2xl border border-indigo-600 bg-[rgb(17,24,39)] p-8 text-white drop-shadow-2xl dark:bg-gray-800 md:w-1/5">
-          <div className="absolute top-0 z-10 h-32 w-full rounded-full bg-purple-900 blur-[120px] dark:block" />
+        <div className="relative z-20 min-h-[430px] w-full min-w-[300px] rounded-2xl border border-indigo-600 bg-[rgb(17,24,39)] p-8 text-white drop-shadow-2xl dark:bg-gray-800 md:w-1/5">
+          <div className="absolute top-0 hidden h-32 w-full rounded-full bg-purple-900 blur-[120px] dark:block" />
 
           <h3 className="text mb-4 inline-block rounded-full border border-gray-500 px-4 py-1 font-semibold text-white">
             Ultimate

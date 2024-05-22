@@ -1,3 +1,4 @@
+import ChallengeBody from "@/components/challenge/challenge"
 import ChallengeHeader from "@/components/challenge/challenge-header"
 import { mostRecentLang } from "@/lib/mostRecentLang"
 
@@ -14,13 +15,13 @@ const Challenge = async () => {
 
   return (
     <div
-      className="h-screen"
+      className="flex h-screen w-screen flex-col"
       style={{
-        width: "100vw",
         overflowX: "hidden",
       }}
     >
       <ChallengeHeader mostRecentLang={mostRecentLanguage} />
+      <ChallengeBody />
     </div>
   )
 }

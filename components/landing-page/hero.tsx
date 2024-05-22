@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { Dialog } from "@headlessui/react"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
-import Flueny from "../header/linguapro-logo"
+import LinguaPro from "../header/linguapro-logo"
 import Link from "next/link"
 import { ModeToggle } from "../global/mode-toggle"
 import TypeWriter, { TypewriterClass } from "typewriter-effect"
@@ -41,7 +41,7 @@ export default function Hero() {
   }
 
   return (
-    <div className="relative h-screen bg-white dark:bg-black">
+    <div className="relative bg-white dark:bg-black">
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
           className="flex items-center justify-between p-6 lg:px-8"
@@ -49,7 +49,7 @@ export default function Hero() {
         >
           <div className="flex lg:flex-1">
             <div className="ml-3 p-1.5">
-              <Flueny />
+              <LinguaPro />
             </div>
           </div>
           <div className="flex lg:hidden">
@@ -94,11 +94,7 @@ export default function Hero() {
             <div className="flex items-center justify-between">
               <Link href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">LinguaPro</span>
-                <img
-                  className="h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt=""
-                />
+                <LinguaPro />
               </Link>
               <button
                 type="button"
@@ -136,7 +132,7 @@ export default function Hero() {
         </Dialog>
       </header>
 
-      <div className="relative isolate h-screen px-6 pt-14 lg:px-8">
+      <div className="relative isolate px-6 pt-14 lg:px-8">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           aria-hidden="true"
@@ -149,7 +145,7 @@ export default function Hero() {
             }}
           />
         </div>
-        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+        <div className="mx-auto flex max-w-2xl flex-col items-center justify-center py-32 xl:h-screen xl:py-0">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:text-slate-200 dark:ring-gray-500">
               What makes us so special{" "}
@@ -159,7 +155,7 @@ export default function Hero() {
               </Link>
             </div>
           </div>
-          <div className="text-center">
+          <div className="mb-32 text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
               Discover the joy of learning{" "}
               <span id="typewriter" className="inline-block">

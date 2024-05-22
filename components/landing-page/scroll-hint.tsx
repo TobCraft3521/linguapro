@@ -10,7 +10,7 @@ const ScrollHint = () => {
 
   return (
     <ChevronsDown
-      className="absolute top-[90vh] mx-auto w-full animate-bounce text-slate-500"
+      className="absolute top-[70vh] mx-auto w-full animate-bounce text-slate-500 md:top-[55vh] xl:top-[90vh]"
       style={{ display: display ? "block" : "none" }}
       size={42}
     />
