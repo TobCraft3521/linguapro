@@ -15,6 +15,7 @@ const ChallengeFooter = ({ state }: ChallengeFooterProps) => {
               Check
             </Button>
           )}
+          {state === "check" && <Button variant="secondary">Check</Button>}
         </div>
       </div>
     </div>

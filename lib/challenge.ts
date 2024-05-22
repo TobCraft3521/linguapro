@@ -124,6 +124,7 @@ export const checkSolution = async (solution: String) => {
   return {
     right,
     expired: false,
+    end: unit.tasks.length - 1 === task.index,
   }
 }
 

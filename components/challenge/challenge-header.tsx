@@ -4,7 +4,7 @@
 import { useModal } from "@/hooks/use-modal-store"
 import { Language } from "@prisma/client"
 import { Heart, Loader2, Timer, X } from "lucide-react"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { Progress } from "../ui/progress"
 import { queryChallengeSession } from "@/lib/challenge"
 import { ChallengeSessionContext } from "../providers/challenge-session-context"
@@ -24,8 +24,10 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
   const [remainingTime, setRemainingTime] = useState<number | undefined>(
     undefined,
   )
+  const isLoading = useRef(true)
 
   useEffect(() => {
+    isLoading.current = true
     const fetchData = async () => {
       const challengeSession = await queryChallengeSession()
       const startTime = challengeSession?.startedAt.getTime() || 0
@@ -33,6 +35,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
       setHearts(challengeSession?.hearts)
       setExpirationTime(startTime + timeLimit)
       setProgress(challengeSession?.progress)
+      isLoading.current = false
     }
     fetchData()
     console.log("fetching data")
@@ -40,7 +43,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
 
   useEffect(() => {
     const updateRemainingTime = () => {
-      if (expirationTime !== undefined) {
+      if (expirationTime !== undefined && !isLoading.current) {
         const now = new Date().getTime()
         const timeLeft = expirationTime - now
         setRemainingTime(timeLeft > 0 ? timeLeft : 0)
@@ -52,7 +55,6 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
     }
 
     const interval = setInterval(updateRemainingTime, 1000)
-    updateRemainingTime() // Initial call to set the remaining time immediately
 
     return () => clearInterval(interval) // Cleanup interval on unmount
   }, [expirationTime, onOpen, refresh])
