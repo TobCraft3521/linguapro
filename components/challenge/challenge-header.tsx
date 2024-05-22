@@ -8,6 +8,7 @@ import { useContext, useEffect, useRef, useState } from "react"
 import { Progress } from "../ui/progress"
 import { queryChallengeSession } from "@/lib/challenge"
 import { ChallengeSessionContext } from "../providers/challenge-session-context"
+import { profile } from "console"
 
 interface ChallengeHeaderProps {
   mostRecentLang?: Language
@@ -15,7 +16,7 @@ interface ChallengeHeaderProps {
 
 const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
   const { onOpen } = useModal()
-  const { refresh } = useContext(ChallengeSessionContext) || {}
+  const { refresh, refreshHearts } = useContext(ChallengeSessionContext) || {}
   const [hearts, setHearts] = useState<number | undefined>(undefined)
   const [expirationTime, setExpirationTime] = useState<number | undefined>(
     undefined,
@@ -32,14 +33,22 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
       const challengeSession = await queryChallengeSession()
       const startTime = challengeSession?.startedAt.getTime() || 0
       const timeLimit = (challengeSession?.timeLimit || 0) * 1000
-      setHearts(challengeSession?.hearts)
       setExpirationTime(startTime + timeLimit)
       setProgress(challengeSession?.progress)
+      setHearts(challengeSession?.hearts)
       isLoading.current = false
     }
     fetchData()
     console.log("fetching data")
   }, [refresh])
+
+  useEffect(() => {
+    const updateHearts = async () => {
+      const challengeSession = await queryChallengeSession()
+      setHearts(challengeSession?.hearts)
+    }
+    updateHearts()
+  }, [refreshHearts])
 
   useEffect(() => {
     const updateRemainingTime = () => {

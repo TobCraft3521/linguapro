@@ -3,6 +3,8 @@
 import { ClientTask } from "@/app/challenge/page"
 import Task from "./task"
 import { Loader2 } from "lucide-react"
+import { useContext, useEffect, useState } from "react"
+import { ChallengeSessionContext } from "../providers/challenge-session-context"
 
 interface ChallengeBodyProps {
   activeTaskIndex: number
@@ -10,6 +12,11 @@ interface ChallengeBodyProps {
   isLoading: boolean
 }
 const ChallengeBody = ({ tasks, isLoading }: ChallengeBodyProps) => {
+  const { refresh } = useContext(ChallengeSessionContext) || {}
+  const [reload, setReload] = useState(false)
+  useEffect(() => {
+    setReload(!reload)
+  }, [refresh])
   return (
     <div className="flex w-full flex-1 items-center justify-center">
       <div className="max-w-[1024px] flex-1">

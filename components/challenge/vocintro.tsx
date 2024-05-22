@@ -20,11 +20,11 @@ const VocIntro = ({ task }: VocIntroProps) => {
   }
   return (
     <div className="flex flex-col items-center text-center">
-      <h3 className="p-16 pt-0 text-2xl font-semibold md:max-w-[40vw]">
+      <h3 className="p-4 text-xl font-semibold sm:text-2xl md:max-w-[600px] md:p-16 md:pt-0">
         {task.description}
       </h3>
 
-      <div className="grid w-full grid-cols-2 gap-4 px-8 md:grid-cols-3">
+      <div className="grid max-h-[50vh] w-full grid-cols-2 gap-4 px-8 md:w-auto md:grid-cols-3">
         {(options as { text: string; img: string; sound: string }[]).map(
           (option, index) => (
             <VocIntroCard

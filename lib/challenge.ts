@@ -98,8 +98,15 @@ export const checkSolution = async (solution: String) => {
     },
     include: {
       units: {
+        orderBy: {
+          index: "asc",
+        },
         include: {
-          tasks: true,
+          tasks: {
+            orderBy: {
+              index: "asc",
+            },
+          },
         },
       },
     },
@@ -108,15 +115,19 @@ export const checkSolution = async (solution: String) => {
   const unit = lesson.units[activeUnit]
   const task = unit.tasks[profile.challengeProgress]
   const right = task.solution === solution
+  const end = profile.challengeProgress + 1 === unit.tasks.length
+  console.log(end)
   if (right) {
-    await db.profile.update({
-      where: {
-        id: profile.id,
-      },
-      data: {
-        progress: profile.progress + 1,
-      },
-    })
+    if (!end) {
+      await db.profile.update({
+        where: {
+          id: profile.id,
+        },
+        data: {
+          challengeProgress: profile.challengeProgress + 1,
+        },
+      })
+    }
   } else {
     await decreaseHearts()
   }
@@ -124,7 +135,7 @@ export const checkSolution = async (solution: String) => {
   return {
     right,
     expired: false,
-    end: unit.tasks.length - 1 === task.index,
+    end,
   }
 }
 
@@ -148,7 +159,6 @@ export const queryTasks = async () => {
     },
   })
   const tasks = unit?.tasks
-  console.log(unit)
   // ⚠️ dont send solution to client
   return tasks?.map((task) => {
     return {

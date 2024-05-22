@@ -23,7 +23,7 @@ const Challenge = () => {
   const { attempt, setAttempt, response, setResponse } =
     useContext(ChallengeSessionContext) || {}
 
-  const footerState = attempt ? "check" : "inactive"
+  const footerState = response ? response : attempt ? "check" : "inactive"
   useEffect(() => {
     const fetchData = async () => {
       setMostRecentLanguage(await mostRecentLang())
@@ -42,7 +42,9 @@ const Challenge = () => {
     >
       <ChallengeHeader mostRecentLang={mostRecentLanguage} />
       <ChallengeBody tasks={tasks} activeTaskIndex={0} isLoading={isLoading} />
-      <ChallengeFooter state={footerState} />
+      <ChallengeFooter
+        state={footerState as "check" | "inactive" | "wrong" | "correct"}
+      />
     </div>
   )
 }
