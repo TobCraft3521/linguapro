@@ -4,9 +4,10 @@
 import { useModal } from "@/hooks/use-modal-store"
 import { Language } from "@prisma/client"
 import { Heart, Loader2, Timer, X } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Progress } from "../ui/progress"
 import { queryChallengeSession } from "@/lib/challenge"
+import { ChallengeSessionContext } from "../providers/challenge-session-context"
 
 interface ChallengeHeaderProps {
   mostRecentLang?: Language
@@ -14,6 +15,7 @@ interface ChallengeHeaderProps {
 
 const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
   const { onOpen } = useModal()
+  const { refresh } = useContext(ChallengeSessionContext) || {}
   const [hearts, setHearts] = useState<number | undefined>(undefined)
   const [expirationTime, setExpirationTime] = useState<number | undefined>(
     undefined,
@@ -33,7 +35,8 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
       setProgress(challengeSession?.progress)
     }
     fetchData()
-  }, [])
+    console.log("fetching data")
+  }, [refresh])
 
   useEffect(() => {
     const updateRemainingTime = () => {
@@ -52,7 +55,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
     updateRemainingTime() // Initial call to set the remaining time immediately
 
     return () => clearInterval(interval) // Cleanup interval on unmount
-  }, [expirationTime, onOpen])
+  }, [expirationTime, onOpen, refresh])
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60000)
@@ -62,7 +65,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
 
   return (
     <div className="flex max-w-[100vw] items-center justify-center">
-      <div className="flex flex-row items-center justify-center gap-4 p-8 md:gap-8 md:p-12">
+      <div className="flex flex-row items-center justify-center gap-4 p-8 md:gap-8 md:p-0 md:py-12 xl:max-w-[1024px]">
         <button
           onClick={() =>
             onOpen("confirm", {
@@ -76,12 +79,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
         >
           <X size={24} />
         </button>
-        <div className="">
-          <Progress
-            value={progress}
-            className="w-[40vw] xl:w-[100vw] xl:max-w-[1024px]"
-          />
-        </div>
+        <Progress value={progress} className="w-[40vw] xl:w-[100vw] " />
         <div className="flex flex-row items-center justify-center gap-2 font-bold">
           <Heart size={24} className="text-red-600" />
           {hearts !== undefined ? (
@@ -94,7 +92,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
           className="flex flex-row items-center justify-center gap-2 font-bold"
           onClick={() => onOpen("timeout")}
         >
-          <Timer size={24} className="text-gray-800" />
+          <Timer size={24} className="text-gray-800 dark:text-white" />
           {remainingTime !== undefined ? (
             formatTime(remainingTime)
           ) : (

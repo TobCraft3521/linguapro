@@ -1,5 +1,3 @@
-// path: /components/TimeOutModal.tsx
-
 import {
   Dialog,
   DialogContent,
@@ -12,10 +10,23 @@ import {
 import { useModal } from "@/hooks/use-modal-store"
 import { AlarmClock, AlertCircle, Hourglass, XCircle } from "lucide-react"
 import { Button } from "../ui/button"
+import { useRouter } from "next/navigation"
+import { resetChallengeSession } from "@/lib/challenge"
+import { useContext } from "react"
+import { ChallengeSessionContext } from "../providers/challenge-session-context"
 
 const TimeOutModal = () => {
   const { isOpen, onClose, type, data } = useModal()
+  const router = useRouter()
+  const { triggerRefresh, refresh } = useContext(ChallengeSessionContext) || {}
+
   const isModalOpen = isOpen && type === "timeout"
+  const onRetry = async () => {
+    onClose()
+    await resetChallengeSession()
+    triggerRefresh && triggerRefresh()
+    console.log(triggerRefresh, refresh)
+  }
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent className="mx-auto max-w-lg p-6">
@@ -31,7 +42,9 @@ const TimeOutModal = () => {
         </DialogDescription>
         <div className="flex w-full flex-row justify-between pt-4">
           <Button variant="outline">Back</Button>
-          <Button variant="super">Retry</Button>
+          <Button variant="super" onClick={onRetry}>
+            Retry
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

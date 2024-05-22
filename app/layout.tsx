@@ -5,6 +5,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "react-hot-toast"
 import { ModalProvider } from "@/components/providers/modal-provider"
+import { ChallengeSessionProvider } from "@/components/providers/challenge-session-context"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -36,9 +37,11 @@ export default function RootLayout({
             enableSystem
             storageKey="items-theme"
           >
-            <ModalProvider />
             <Toaster />
-            {children}
+            <ChallengeSessionProvider>
+              <ModalProvider />
+              {children}
+            </ChallengeSessionProvider>
           </ThemeProvider>
         </body>
       </html>

@@ -1,5 +1,5 @@
 "use server"
-import { Language } from "@prisma/client"
+import { Language, Task } from "@prisma/client"
 import { db } from "./db"
 import { cache } from "react"
 import { auth } from "@clerk/nextjs"
@@ -132,24 +132,30 @@ export const queryTasks = async () => {
   if (!profile) return
   const activeLesson = Math.floor(profile.progress / 5)
   const activeUnit = profile.progress % 5
-  const lesson = await db.lesson.findFirst({
+  const unit = await db.unit.findFirst({
     where: {
-      course: {
-        language: profile.language,
+      lesson: {
+        course: {
+          language: profile.language,
+        },
+        index: activeLesson,
       },
-      index: activeLesson,
+      index: activeUnit,
     },
     include: {
-      units: {
-        include: {
-          tasks: true,
-        },
-      },
+      tasks: true,
     },
   })
-  if (!lesson) return
-  const unit = lesson.units[activeUnit]
-  return unit.tasks
+  const tasks = unit?.tasks
+  // ⚠️ dont send solution to client
+  return tasks?.map((task) => {
+    return {
+      description: task.description,
+      options: task.options,
+      index: task.index,
+      type: task.type,
+    }
+  })
 }
 
 export const resetChallengeSession = async () => {
