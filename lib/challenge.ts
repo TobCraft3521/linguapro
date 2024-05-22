@@ -147,6 +147,7 @@ export const queryTasks = async () => {
     },
   })
   const tasks = unit?.tasks
+  console.log(unit)
   // ⚠️ dont send solution to client
   return tasks?.map((task) => {
     return {

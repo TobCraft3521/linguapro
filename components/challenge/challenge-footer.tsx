@@ -6,8 +6,8 @@ interface ChallengeFooterProps {
 
 const ChallengeFooter = ({ state }: ChallengeFooterProps) => {
   return (
-    <div className="flex h-44 w-full justify-center ">
-      <div className="flex flex-col items-center justify-between border-t-2 py-12 dark:border-t-slate-500 md:flex-row md:px-32 lg:w-[1024px]">
+    <div className="flex h-24 w-full justify-center md:h-44 ">
+      <div className="flex w-full flex-row items-center justify-between border-t-2 px-16 py-8 dark:border-t-zinc-700 md:px-32 md:py-12 lg:w-[1024px]">
         <div>a</div>
         <div>
           {state === "inactive" && (

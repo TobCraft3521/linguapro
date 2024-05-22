@@ -22,14 +22,13 @@ const TimeOutModal = () => {
 
   const isModalOpen = isOpen && type === "timeout"
   const onRetry = async () => {
-    onClose()
     await resetChallengeSession()
     triggerRefresh && triggerRefresh()
-    console.log(triggerRefresh, refresh)
+    onClose()
   }
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
-      <DialogContent className="mx-auto max-w-lg p-6">
+      <DialogContent className="mx-auto max-w-lg bg-white p-6 dark:bg-black">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <AlarmClock className="text-red-600" size={24} />

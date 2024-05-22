@@ -8,7 +8,7 @@ import { Language, Task, TaskType } from "@prisma/client"
 import { JsonValue } from "@prisma/client/runtime/library"
 import { useEffect, useState } from "react"
 
-type ClientTask = {
+export type ClientTask = {
   description: string
   options: JsonValue
   index: number
@@ -34,7 +34,7 @@ const Challenge = () => {
       }}
     >
       <ChallengeHeader mostRecentLang={mostRecentLanguage} />
-      <ChallengeBody />
+      <ChallengeBody tasks={tasks} activeTaskIndex={0} />
       <ChallengeFooter state="inactive" />
     </div>
   )

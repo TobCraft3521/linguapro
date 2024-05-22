@@ -34,7 +34,7 @@ const ConfirmModal = () => {
 
   return (
     <Dialog open={isModalOpen} onOpenChange={handleClose}>
-      <DialogContent>
+      <DialogContent className="bg-white dark:bg-black">
         <DialogHeader>{data.title}</DialogHeader>
         <DialogDescription>{data.description}</DialogDescription>
         <div className="mt-4 flex flex-row justify-between">

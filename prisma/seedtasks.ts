@@ -44,6 +44,7 @@ const seed = async () => {
           {
             text: "Au revoir",
             img: "/imgs/tasks/aurevoir.png",
+            sound: "/sounds/tasks/aurevoir.mp3",
           },
           {
             text: "Salut",
@@ -56,3 +57,11 @@ const seed = async () => {
     ],
   })
 }
+
+seed()
+  .catch((e) => {
+    throw e
+  })
+  .finally(async () => {
+    await db.$disconnect()
+  })
