@@ -11,7 +11,11 @@ interface ChallengeBodyProps {
   tasks: ClientTask[]
   isLoading: boolean
 }
-const ChallengeBody = ({ tasks, isLoading }: ChallengeBodyProps) => {
+const ChallengeBody = ({
+  tasks,
+  isLoading,
+  activeTaskIndex,
+}: ChallengeBodyProps) => {
   const { refresh } = useContext(ChallengeSessionContext) || {}
   const [reload, setReload] = useState(false)
   useEffect(() => {
@@ -26,9 +30,7 @@ const ChallengeBody = ({ tasks, isLoading }: ChallengeBodyProps) => {
           </div>
         ) : (
           <div>
-            {tasks.map((task, index) => (
-              <Task task={task} key={index} />
-            ))}
+            <Task task={tasks[activeTaskIndex]} />
           </div>
         )}
       </div>

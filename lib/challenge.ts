@@ -116,9 +116,8 @@ export const checkSolution = async (solution: String) => {
   const task = unit.tasks[profile.challengeProgress]
   const right = task.solution === solution
   const end = profile.challengeProgress + 1 === unit.tasks.length
-  console.log(end)
   if (right) {
-    if (!end) {
+    if (end) {
       await db.profile.update({
         where: {
           id: profile.id,
@@ -137,6 +136,43 @@ export const checkSolution = async (solution: String) => {
     expired: false,
     end,
   }
+}
+
+export const queryChallengeProgress = async () => {
+  const profile = await queryActiveProfile()
+  if (!profile) return
+  return profile.challengeProgress
+}
+
+export const queryChallengeTasksLength = async () => {
+  const profile = await queryActiveProfile()
+  if (!profile) return
+  const activeLesson = Math.floor(profile.progress / 5)
+  const activeUnit = profile.progress % 5
+  const lesson = await db.lesson.findFirst({
+    where: {
+      course: {
+        language: profile.language,
+      },
+      index: activeLesson,
+    },
+    include: {
+      units: {
+        orderBy: {
+          index: "asc",
+        },
+        include: {
+          tasks: {
+            orderBy: {
+              index: "asc",
+            },
+          },
+        },
+      },
+    },
+  })
+  if (!lesson) return
+  return lesson.units[activeUnit].tasks.length
 }
 
 export const queryTasks = async () => {

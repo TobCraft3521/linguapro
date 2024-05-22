@@ -6,7 +6,7 @@ interface TaskProps {
 }
 
 const Task = ({ task }: TaskProps) => {
-  return <div>{task.type === "VOCINTRO" && <VocIntro task={task} />} </div>
+  return <div>{task?.type === "VOCINTRO" && <VocIntro task={task} />} </div>
 }
 
 export default Task

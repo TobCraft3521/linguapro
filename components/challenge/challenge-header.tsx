@@ -6,7 +6,10 @@ import { Language } from "@prisma/client"
 import { Heart, Loader2, Timer, X } from "lucide-react"
 import { useContext, useEffect, useRef, useState } from "react"
 import { Progress } from "../ui/progress"
-import { queryChallengeSession } from "@/lib/challenge"
+import {
+  queryChallengeSession,
+  queryChallengeTasksLength,
+} from "@/lib/challenge"
 import { ChallengeSessionContext } from "../providers/challenge-session-context"
 import { profile } from "console"
 
@@ -26,6 +29,9 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
     undefined,
   )
   const isLoading = useRef(true)
+  const [challengeTaskLength, setChallengeTaskLength] = useState<
+    number | undefined
+  >(undefined)
 
   useEffect(() => {
     isLoading.current = true
@@ -36,6 +42,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
       setExpirationTime(startTime + timeLimit)
       setProgress(challengeSession?.progress)
       setHearts(challengeSession?.hearts)
+      setChallengeTaskLength(await queryChallengeTasksLength())
       isLoading.current = false
     }
     fetchData()
@@ -90,7 +97,10 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
         >
           <X size={24} />
         </button>
-        <Progress value={progress} className="w-[40vw] xl:w-[100vw] " />
+        <Progress
+          value={((progress || 0) / (challengeTaskLength || 1)) * 100}
+          className="w-[40vw] xl:w-[100vw] "
+        />
         <div className="flex flex-row items-center justify-center gap-2 font-bold">
           <Heart size={24} className="text-red-600" />
           {hearts !== undefined ? (
