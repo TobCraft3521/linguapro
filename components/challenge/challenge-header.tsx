@@ -67,7 +67,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
 
   return (
     <div className="flex max-w-[100vw] items-center justify-center">
-      <div className="flex flex-row items-center justify-center gap-4 p-8 md:gap-8 md:p-0 md:py-12 xl:max-w-[1024px]">
+      <div className="flex flex-row items-center justify-center gap-4 p-8 pb-0 md:gap-8 md:p-0 md:py-12 xl:max-w-[1024px]">
         <button
           onClick={() =>
             onOpen("confirm", {

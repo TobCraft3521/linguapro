@@ -19,8 +19,8 @@ const ChallengeBody = ({ tasks, isLoading }: ChallengeBodyProps) => {
           </div>
         ) : (
           <div>
-            {tasks.map((task) => (
-              <Task task={task} />
+            {tasks.map((task, index) => (
+              <Task task={task} key={index} />
             ))}
           </div>
         )}

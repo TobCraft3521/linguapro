@@ -24,7 +24,7 @@ const VocIntro = ({ task }: VocIntroProps) => {
         {task.description}
       </h3>
 
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+      <div className="grid w-full grid-cols-2 gap-4 px-8 md:grid-cols-3">
         {(options as { text: string; img: string; sound: string }[]).map(
           (option, index) => (
             <VocIntroCard
