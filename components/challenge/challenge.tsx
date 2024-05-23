@@ -32,9 +32,19 @@ const ChallengeBody = ({
             <Loader2 size={48} className="animate-spin text-zinc-600" />
           </div>
         ) : (
-          <div>
-            <Task task={tasks[activeTaskIndex]} />
-          </div>
+          <>
+            {tasks.length === 0 && (
+              <div className="mx-auto w-screen max-w-xs text-center text-2xl font-medium md:max-w-xl">
+                pssst 🤫 I didnt create any tasks for this challenge yet
+                <br />
+                <br />
+                you can close the challenge now
+              </div>
+            )}
+            <div>
+              <Task task={tasks[activeTaskIndex]} />
+            </div>
+          </>
         )}
       </div>
     </div>

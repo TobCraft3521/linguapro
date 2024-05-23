@@ -16,9 +16,16 @@ const LessonComp = ({ lesson }: LessonCompProps) => {
   const side = lesson.index % 2 === 0
 
   // Define the lockStates as a synchronous function inside the server component
-  const [lockStates, setLockStates] = useState<boolean[]>([])
+  const [lockStates, setLockStates] = useState<boolean[]>([
+    true,
+    true,
+    true,
+    true,
+    true,
+  ])
   const [nextUnitIndex, setNextUnitIndex] = useState<number>(0)
   const [isActiveLesson, setIsActiveLesson] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +35,7 @@ const LessonComp = ({ lesson }: LessonCompProps) => {
       const activeLessonIndex = Math.floor(progress / 5)
       setIsActiveLesson(activeLessonIndex === lesson.index)
       setNextUnitIndex(progress % 5)
+      setLoading(false)
     }
     fetchData()
   }, [lesson.index])
@@ -52,6 +60,7 @@ const LessonComp = ({ lesson }: LessonCompProps) => {
             index={index}
             isActiveLesson={isActiveLesson}
             nextUnitIndex={nextUnitIndex}
+            loading={loading}
           />
         ))}
       </div>

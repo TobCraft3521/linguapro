@@ -2,16 +2,15 @@
 
 "use client"
 import { useModal } from "@/hooks/use-modal-store"
-import { Language } from "@prisma/client"
-import { Heart, Loader2, Timer, X } from "lucide-react"
-import { useContext, useEffect, useRef, useState } from "react"
-import { Progress } from "../ui/progress"
 import {
   queryChallengeSession,
   queryChallengeTasksLength,
 } from "@/lib/challenge"
+import { Language } from "@prisma/client"
+import { Heart, Loader2, Timer, X } from "lucide-react"
+import { useContext, useEffect, useRef, useState } from "react"
 import { ChallengeSessionContext } from "../providers/challenge-session-context"
-import { profile } from "console"
+import { Progress } from "../ui/progress"
 
 interface ChallengeHeaderProps {
   mostRecentLang?: Language
@@ -19,9 +18,20 @@ interface ChallengeHeaderProps {
 
 const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
   const { onOpen } = useModal()
-  const { refresh, refreshHearts, end } =
-    useContext(ChallengeSessionContext) || {}
-  const [hearts, setHearts] = useState<number | undefined>(undefined)
+  const {
+    refresh,
+    refreshHearts,
+    end,
+    setTimeLeft,
+    hearts,
+    setHearts,
+    taskLength,
+    setTaskLength,
+  } = useContext(ChallengeSessionContext) || {
+    setTimeLeft: () => {},
+    setHearts: () => {},
+    setTaskLength: () => {},
+  }
   const [expirationTime, setExpirationTime] = useState<number | undefined>(
     undefined,
   )
@@ -30,9 +40,6 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
     undefined,
   )
   const isLoading = useRef(true)
-  const [challengeTaskLength, setChallengeTaskLength] = useState<
-    number | undefined
-  >(undefined)
 
   useEffect(() => {
     isLoading.current = true
@@ -42,20 +49,23 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
       const timeLimit = (challengeSession?.timeLimit || 0) * 1000
       setExpirationTime(startTime + timeLimit)
       setProgress(challengeSession?.progress)
-      setHearts(challengeSession?.hearts)
-      setChallengeTaskLength(await queryChallengeTasksLength())
+      setHearts(challengeSession?.hearts || 0)
+      setTaskLength((await queryChallengeTasksLength()) || 0)
+
       isLoading.current = false
     }
     fetchData()
     console.log("fetching data")
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refresh])
 
   useEffect(() => {
     const updateHearts = async () => {
       const challengeSession = await queryChallengeSession()
-      setHearts(challengeSession?.hearts)
+      setHearts(challengeSession?.hearts || 0)
     }
     updateHearts()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refreshHearts])
 
   useEffect(() => {
@@ -64,12 +74,11 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
         const now = new Date().getTime()
         const timeLeft = expirationTime - now
         setRemainingTime(timeLeft > 0 ? timeLeft : 0)
+        setTimeLeft(timeLeft)
+        // also backend validated
         if (timeLeft <= 0) {
           clearInterval(interval) // Clear interval when time runs out
           onOpen("timeout") // Trigger the timeout modal
-        }
-      } else {
-        if (end) {
         }
       }
     }
@@ -103,7 +112,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
           <X size={24} />
         </button>
         <Progress
-          value={((progress || 0) / (challengeTaskLength || 1)) * 100}
+          value={((progress || 0) / (taskLength || 1)) * 100}
           className="w-[40vw] xl:w-[100vw] "
         />
         <div className="flex flex-row items-center justify-center gap-2 font-bold">

@@ -27,6 +27,12 @@ const ChallengeFooter = ({ state }: ChallengeFooterProps) => {
     refresh,
     setEnd,
     setClickedNext,
+    setSessionHearts,
+    hearts,
+    taskLength,
+    setTaskLength,
+    sessionTaskLength,
+    setSessionTaskLength,
   } = useContext(ChallengeSessionContext) || {
     attempt: "",
     setResponse: () => {},
@@ -35,6 +41,8 @@ const ChallengeFooter = ({ state }: ChallengeFooterProps) => {
     triggerRefreshHearts: () => {},
     setEnd: () => {},
     setClickedNext: () => {},
+    setSessionHearts: () => {},
+    setSessionTaskLength: () => {},
   }
   const handleCheck = async () => {
     setLoading(true)
@@ -48,6 +56,8 @@ const ChallengeFooter = ({ state }: ChallengeFooterProps) => {
     setLoading(false)
     setEnd(end || false)
     setClickedNext(false)
+    setSessionHearts(hearts || 0)
+    setSessionTaskLength(taskLength || 0)
     triggerRefreshHearts()
   }
 
@@ -60,6 +70,7 @@ const ChallengeFooter = ({ state }: ChallengeFooterProps) => {
     setResponse("")
     setAttempt("")
     setClickedNext(true)
+
     triggerRefresh()
   }
 

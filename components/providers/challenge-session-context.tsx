@@ -15,6 +15,16 @@ type ContextProps = {
   setEnd: React.Dispatch<React.SetStateAction<boolean>>
   clickedNext: boolean
   setClickedNext: React.Dispatch<React.SetStateAction<boolean>>
+  timeLeft: number
+  setTimeLeft: React.Dispatch<React.SetStateAction<number>>
+  hearts: number
+  setHearts: React.Dispatch<React.SetStateAction<number>>
+  sessionHearts: number // for end screen
+  setSessionHearts: React.Dispatch<React.SetStateAction<number>>
+  sessionTaskLength: number
+  setSessionTaskLength: React.Dispatch<React.SetStateAction<number>>
+  taskLength: number
+  setTaskLength: React.Dispatch<React.SetStateAction<number>>
 }
 
 export const ChallengeSessionContext = createContext<ContextProps | null>(null)
@@ -30,6 +40,11 @@ export const ChallengeSessionProvider = ({
   const [response, setResponse] = useState("")
   const [end, setEnd] = useState(false)
   const [clickedNext, setClickedNext] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(0)
+  const [hearts, setHearts] = useState(5)
+  const [sessionHearts, setSessionHearts] = useState(5)
+  const [sessionTaskLength, setSessionTaskLength] = useState(0)
+  const [taskLength, setTaskLength] = useState(0)
   const { onClose } = useModal()
 
   const triggerRefresh = () => {
@@ -54,6 +69,16 @@ export const ChallengeSessionProvider = ({
     setEnd,
     clickedNext,
     setClickedNext,
+    timeLeft,
+    setTimeLeft,
+    hearts,
+    setHearts,
+    sessionHearts,
+    setSessionHearts,
+    sessionTaskLength,
+    setSessionTaskLength,
+    taskLength,
+    setTaskLength,
   }
 
   return (

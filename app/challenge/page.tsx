@@ -63,7 +63,7 @@ const Challenge = () => {
           />
         </>
       ) : (
-        <FinishedScreen tasks={tasks} />
+        <FinishedScreen />
       )}
     </div>
   )

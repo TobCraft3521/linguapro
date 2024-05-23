@@ -110,13 +110,26 @@ export const checkSolution = async (solution: String) => {
   const right = task.solution === solution
   const end = profile.challengeProgress + 1 === unit.tasks.length
   if (right) {
-    if (end) {
+    if (!end) {
       await db.profile.update({
         where: {
           id: profile.id,
         },
         data: {
           challengeProgress: profile.challengeProgress + 1,
+        },
+      })
+    } else {
+      await db.profile.update({
+        where: {
+          id: profile.id,
+        },
+        data: {
+          progress: profile.progress + 1,
+          xp: profile.xp + unit.tasks.length * 10,
+          challengeProgress: 0,
+          hearts: 5,
+          startedAt: new Date(new Date().getTime() - unit.timeLimit * 1000),
         },
       })
     }
@@ -184,7 +197,11 @@ export const queryTasks = async () => {
       index: activeUnit,
     },
     include: {
-      tasks: true,
+      tasks: {
+        orderBy: {
+          index: "asc",
+        },
+      },
     },
   })
   const tasks = unit?.tasks

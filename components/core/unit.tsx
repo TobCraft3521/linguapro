@@ -5,6 +5,7 @@ import toast from "react-hot-toast"
 import { useState } from "react"
 import "./unit.css"
 import { redirect, useRouter } from "next/navigation"
+import { Loader2 } from "lucide-react"
 
 interface UnitProps {
   unit: Unit
@@ -13,6 +14,7 @@ interface UnitProps {
   index: number
   isActiveLesson: boolean
   nextUnitIndex: number
+  loading: boolean
 }
 
 function pathOffset(index: number, period: number, amplitude: number) {
@@ -22,15 +24,20 @@ function pathOffset(index: number, period: number, amplitude: number) {
 const UnitComp = ({
   unit,
   lesson,
-  lockStates = [false, true, true, true, true],
+  lockStates = [true, true, true, true, true],
   index,
   isActiveLesson,
   nextUnitIndex,
+  loading,
 }: UnitProps) => {
   const [isHovered, setIsHovered] = useState(false)
   const router = useRouter()
 
   const handleOnClick = (unit: Unit) => {
+    if (loading) {
+      toast.loading("Loading...", { id: "loading", duration: 1000 })
+      return
+    }
     if (!isActiveLesson || unit.index !== nextUnitIndex) {
       toast.error("You must complete the previous unit first", {
         id: "error",
@@ -53,12 +60,12 @@ const UnitComp = ({
   const translateY = isHovered ? "4px" : "0"
 
   return (
-    <div className="flex flex-row relative">
+    <div className="relative flex flex-row">
       <div
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
         key={unit.index}
-        className="flex justify-center items-center cursor-pointer select-none text-2xl text-white font-extrabold w-20 h-16 rounded-[50%] specialshadow rbutton"
+        className="specialshadow rbutton flex h-16 w-20 cursor-pointer select-none items-center justify-center rounded-[50%] text-2xl font-extrabold text-white"
         style={{
           transform:
             "translate(" +
@@ -70,12 +77,22 @@ const UnitComp = ({
         }}
         onClick={() => handleOnClick(unit)}
       >
-        {unit.index + 1}
+        {!loading ? (
+          unit.index + 1
+        ) : (
+          <Loader2 size={24} className="animate-spin text-slate-400" />
+        )}
       </div>
 
       {isActiveLesson && unit.index === nextUnitIndex && (
-        <div className="absolute top-[-2rem] arrow animate-bounce">
-          <div className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-1 rounded-lg shadow text-sm uppercase font-semibold text-center">
+        <div
+          className="arrow absolute top-[-2rem] animate-bounce"
+          style={{
+            position: "absolute",
+            left: pathOffset(lesson.index * 6 + unit.index, 10, 150) + "px",
+          }}
+        >
+          <div className="rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 px-5 py-1 text-center text-sm font-semibold uppercase text-white shadow">
             Start
           </div>
         </div>

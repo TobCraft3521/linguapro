@@ -54,6 +54,31 @@ const seed = async () => {
         ],
         solution: "2",
       },
+      {
+        description:
+          "Now some verbs! Which of these is the correct translation for 'To eat'?",
+        type: "VOCINTRO",
+        index: 1,
+        unitId: firstUnitId,
+        options: [
+          {
+            text: "Manger",
+            img: "/imgs/tasks/food.png",
+            sound: "/sounds/tasks/manger.mp3",
+          },
+          {
+            text: "Boire",
+            img: "/imgs/tasks/drink.png",
+            sound: "/sounds/tasks/boire.mp3",
+          },
+          {
+            text: "Aller",
+            img: "/imgs/tasks/walk.png",
+            sound: "/sounds/tasks/aller.mp3",
+          },
+        ],
+        solution: "0",
+      },
     ],
   })
 }
