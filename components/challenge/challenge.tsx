@@ -5,6 +5,7 @@ import Task from "./task"
 import { Loader2 } from "lucide-react"
 import { useContext, useEffect, useState } from "react"
 import { ChallengeSessionContext } from "../providers/challenge-session-context"
+import FinishedScreen from "./finished-screen"
 
 interface ChallengeBodyProps {
   activeTaskIndex: number
@@ -21,6 +22,7 @@ const ChallengeBody = ({
   const [reload, setReload] = useState(false)
   useEffect(() => {
     setReload(!reload)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refresh])
   return (
     <div className="flex w-full flex-1 items-center justify-center">
@@ -31,11 +33,7 @@ const ChallengeBody = ({
           </div>
         ) : (
           <div>
-            {end && clickedNext ? (
-              <div>End</div>
-            ) : (
-              <Task task={tasks[activeTaskIndex]} />
-            )}
+            <Task task={tasks[activeTaskIndex]} />
           </div>
         )}
       </div>

@@ -2,6 +2,7 @@
 import ChallengeBody from "@/components/challenge/challenge"
 import ChallengeFooter from "@/components/challenge/challenge-footer"
 import ChallengeHeader from "@/components/challenge/challenge-header"
+import FinishedScreen from "@/components/challenge/finished-screen"
 import { ChallengeSessionContext } from "@/components/providers/challenge-session-context"
 import { queryChallengeProgress, queryTasks } from "@/lib/challenge"
 import { mostRecentLang } from "@/lib/mostRecentLang"
@@ -49,16 +50,20 @@ const Challenge = () => {
         overflowX: "hidden",
       }}
     >
-      <ChallengeHeader mostRecentLang={mostRecentLanguage} />
-      <ChallengeBody
-        tasks={tasks}
-        activeTaskIndex={activeTaskIndex}
-        isLoading={isLoading}
-      />
-      {(!end || !clickedNext) && (
-        <ChallengeFooter
-          state={footerState as "check" | "inactive" | "wrong" | "correct"}
-        />
+      {!end || !clickedNext ? (
+        <>
+          <ChallengeHeader mostRecentLang={mostRecentLanguage} />
+          <ChallengeBody
+            tasks={tasks}
+            activeTaskIndex={activeTaskIndex}
+            isLoading={isLoading}
+          />
+          <ChallengeFooter
+            state={footerState as "check" | "inactive" | "wrong" | "correct"}
+          />
+        </>
+      ) : (
+        <FinishedScreen tasks={tasks} />
       )}
     </div>
   )

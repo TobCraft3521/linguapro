@@ -12,6 +12,8 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import Pricing from "@/components/landing-page/pricing"
 import { ChevronsDown } from "lucide-react"
 import ScrollHint from "@/components/landing-page/scroll-hint"
+import { useContext } from "react"
+import { ChallengeSessionContext } from "@/components/providers/challenge-session-context"
 
 export default function App() {
   return (

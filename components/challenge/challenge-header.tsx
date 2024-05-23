@@ -19,7 +19,8 @@ interface ChallengeHeaderProps {
 
 const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
   const { onOpen } = useModal()
-  const { refresh, refreshHearts } = useContext(ChallengeSessionContext) || {}
+  const { refresh, refreshHearts, end } =
+    useContext(ChallengeSessionContext) || {}
   const [hearts, setHearts] = useState<number | undefined>(undefined)
   const [expirationTime, setExpirationTime] = useState<number | undefined>(
     undefined,
@@ -59,7 +60,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
 
   useEffect(() => {
     const updateRemainingTime = () => {
-      if (expirationTime !== undefined && !isLoading.current) {
+      if (expirationTime !== undefined && !isLoading.current && !end) {
         const now = new Date().getTime()
         const timeLeft = expirationTime - now
         setRemainingTime(timeLeft > 0 ? timeLeft : 0)
@@ -67,12 +68,16 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
           clearInterval(interval) // Clear interval when time runs out
           onOpen("timeout") // Trigger the timeout modal
         }
+      } else {
+        if (end) {
+        }
       }
     }
 
     const interval = setInterval(updateRemainingTime, 1000)
 
     return () => clearInterval(interval) // Cleanup interval on unmount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [expirationTime, onOpen, refresh])
 
   const formatTime = (time: number) => {

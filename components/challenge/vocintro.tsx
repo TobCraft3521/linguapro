@@ -15,6 +15,7 @@ const VocIntro = ({ task }: VocIntroProps) => {
     ChallengeSessionContext,
   ) || { attempt: "", setAttempt: () => {} }
   const handleClick = (index: number) => {
+    if (response) return
     setActiveCard(index)
     setAttempt(index.toString())
   }

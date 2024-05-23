@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react"
 import { ChallengeSessionContext } from "../providers/challenge-session-context"
 import { Loader2 } from "lucide-react"
 import { useAudio } from "react-use"
+import { cn } from "@/lib/utils"
 
 export interface ChallengeFooterProps {
   state: "inactive" | "check" | "wrong" | "correct"
@@ -65,13 +66,25 @@ const ChallengeFooter = ({ state }: ChallengeFooterProps) => {
   useEffect(() => {
     setResponse("")
     setAttempt("")
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refresh])
 
   return (
-    <div className="flex h-24 w-full justify-center md:h-44 ">
+    <div
+      className={cn(
+        "flex h-24 w-full justify-center md:h-44",
+        state === "correct" && "border-t-2 border-t-green-500 bg-green-200",
+        state === "wrong" && "border-t-2 border-t-red-500 bg-red-200",
+      )}
+    >
       {correct}
       {wrong}
-      <div className="flex w-full flex-row items-center justify-between border-t-2 px-16 py-8 dark:border-t-zinc-700 md:px-32 md:py-12 lg:w-[1024px]">
+      <div
+        className={cn(
+          "flex w-full flex-row items-center justify-between border-t-2 px-16 py-8 dark:border-t-zinc-700 md:px-32 md:py-12 lg:w-[1024px]",
+          (state === "correct" || state === "wrong") && "border-t-0",
+        )}
+      >
         {state === "inactive" && (
           <>
             <div className="">Do the task before you can check it</div>
