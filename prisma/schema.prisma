@@ -125,7 +125,7 @@ model Task {
   options Json
   // vocmatch: there are simply two arrays of words, and the solution is the order of the indexes of the words that correspond to the second array. eg: ["apple", "banana"] ["banane", "pomme"] => apple is pomme so index 1 and banana is banane so index 0 => solution = 10
   // vocintro: in the description it says which of these is xyz, the options is an array of objects containing a the word b the image path and c the sound path
-  // gap: there is one array of words and the solution is the order of the indexes like in vocmatch, eg i drink ___ (water) options: juice, water => solution = 1 (or more numbers if more gaps)
+  // gap: there is one array of words and the solution is the order of the indexes like in vocmatch, eg i drink ___ (water) options: juice, water => solution = 1 (or more numbers if more gaps) as well as the gap text itself as a string
   // listening: there is an object containing the path to the sound file as well as an array of words that are options for the description, eg it says who stole the money, and the options are ["john", "peter", "mary"] and the sound file says "peter" => solution = 1
 
   solution String

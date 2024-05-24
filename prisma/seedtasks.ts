@@ -39,7 +39,21 @@ const seed = async () => {
     })
   )?.id
 
-  if (!frenchCourseId || !firstUnitId || !secondUnitId) return
+  const thirdUnitId = (
+    await db.unit.findFirst({
+      where: {
+        lesson: {
+          course: {
+            language: "FR",
+          },
+          index: 0,
+        },
+        index: 2,
+      },
+    })
+  )?.id
+
+  if (!frenchCourseId || !firstUnitId || !secondUnitId || !thirdUnitId) return
 
   await db.task.createMany({
     data: [
@@ -103,19 +117,22 @@ const seed = async () => {
         unitId: secondUnitId,
         options: {
           audio: "/sounds/tasks/salut.mp3",
-          options: [
-            {
-              text: "Merci",
-            },
-            {
-              text: "Salut",
-            },
-            {
-              text: "Au revoir",
-            },
-          ],
+          options: ["Merci", "Salut", "Au revoir"],
         },
         solution: "1",
+      },
+      // unit 3
+      {
+        description:
+          "Fill in the gaps! Click the words in the order they should appear in the text. Don't click the words that don't fit in the text. Click the words again to remove them.",
+        type: "GAP",
+        index: 0,
+        unitId: thirdUnitId,
+        options: {
+          text: "_! Je suis Ethan. J'habite à Paris. _!",
+          options: ["Aurevoir", "Salut", "Attends"],
+        },
+        solution: "10",
       },
     ],
   })

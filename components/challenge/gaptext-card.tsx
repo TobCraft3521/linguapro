@@ -4,19 +4,14 @@ import { useContext } from "react"
 import { useAudio } from "react-use"
 import { ChallengeSessionContext } from "../providers/challenge-session-context"
 
-interface ListeningCardProps {
+interface GapTextCardProps {
   option: string
   index: number
   active: boolean
   onClick: () => void
 }
 
-const ListeningCard = ({
-  option,
-  index,
-  active,
-  onClick,
-}: ListeningCardProps) => {
+const GapTextCard = ({ option, index, active, onClick }: GapTextCardProps) => {
   const { response } = useContext(ChallengeSessionContext) || {
     attempt: "",
     setAttempt: () => {},
@@ -43,4 +38,4 @@ const ListeningCard = ({
   )
 }
 
-export default ListeningCard
+export default GapTextCard
