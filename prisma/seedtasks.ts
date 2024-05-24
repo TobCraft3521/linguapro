@@ -25,10 +25,25 @@ const seed = async () => {
     })
   )?.id
 
-  if (!frenchCourseId || !firstUnitId) return
+  const secondUnitId = (
+    await db.unit.findFirst({
+      where: {
+        lesson: {
+          course: {
+            language: "FR",
+          },
+          index: 0,
+        },
+        index: 1,
+      },
+    })
+  )?.id
+
+  if (!frenchCourseId || !firstUnitId || !secondUnitId) return
 
   await db.task.createMany({
     data: [
+      // unit 1
       {
         description:
           "Bonjour, let's start leaning French! Which of these is the correct translation for 'Hello'?",
@@ -78,6 +93,29 @@ const seed = async () => {
           },
         ],
         solution: "0",
+      },
+      // unit 2
+      {
+        description:
+          "Great job! Let's review some vocabulary. What do you hear?",
+        type: "LISTENING",
+        index: 0,
+        unitId: secondUnitId,
+        options: {
+          audio: "/sounds/tasks/salut.mp3",
+          options: [
+            {
+              text: "Merci",
+            },
+            {
+              text: "Salut",
+            },
+            {
+              text: "Au revoir",
+            },
+          ],
+        },
+        solution: "1",
       },
     ],
   })

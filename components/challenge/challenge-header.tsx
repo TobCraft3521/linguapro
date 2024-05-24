@@ -63,6 +63,7 @@ const ChallengeHeader = ({ mostRecentLang }: ChallengeHeaderProps) => {
     const updateHearts = async () => {
       const challengeSession = await queryChallengeSession()
       setHearts(challengeSession?.hearts || 0)
+      if (challengeSession?.hearts === 0) onOpen("nohearts")
     }
     updateHearts()
     // eslint-disable-next-line react-hooks/exhaustive-deps

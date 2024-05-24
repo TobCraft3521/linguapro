@@ -1,7 +1,7 @@
 import { ConfirmModalData } from "@/components/modals/confirm-modal"
 import { create } from "zustand"
 
-export type ModalType = "confirm" | "timeout"
+export type ModalType = "confirm" | "timeout" | "nohearts"
 
 interface ModalData extends ConfirmModalData {}
 

@@ -79,7 +79,10 @@ export const queryChallengeTime = async () => {
 export const checkSolution = async (solution: String) => {
   const profile = await queryActiveProfile()
   if (!profile) return
-  if (await isChallengeSessionExpired()) return { right: false, expired: true }
+  if (await isChallengeSessionExpired())
+    return { right: false, expired: true, nohearts: false, end: false }
+  if (profile.hearts === 0)
+    return { right: false, expired: false, nohearts: true, end: false }
   const activeLesson = Math.floor(profile.progress / 5)
   const activeUnit = profile.progress % 5
   const lesson = await db.lesson.findFirst({
@@ -140,6 +143,7 @@ export const checkSolution = async (solution: String) => {
   return {
     right,
     expired: false,
+    nohearts: false,
     end,
   }
 }

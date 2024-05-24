@@ -2,10 +2,11 @@
 import { Unit } from "@prisma/client"
 import { LessonWithUnits } from "./path"
 import toast from "react-hot-toast"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import "./unit.css"
 import { redirect, useRouter } from "next/navigation"
 import { Loader2 } from "lucide-react"
+import { ChallengeSessionContext } from "../providers/challenge-session-context"
 
 interface UnitProps {
   unit: Unit
@@ -32,6 +33,9 @@ const UnitComp = ({
 }: UnitProps) => {
   const [isHovered, setIsHovered] = useState(false)
   const router = useRouter()
+  const { end, setEnd } = useContext(ChallengeSessionContext) || {
+    setEnd: () => {},
+  }
 
   const handleOnClick = (unit: Unit) => {
     if (loading) {
@@ -49,6 +53,7 @@ const UnitComp = ({
         id: "success",
         duration: 2000,
       })
+      setEnd(false)
       router.push("/challenge")
     }
   }

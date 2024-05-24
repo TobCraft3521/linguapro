@@ -5,6 +5,7 @@ import { ChallengeSessionContext } from "../providers/challenge-session-context"
 import { Loader2 } from "lucide-react"
 import { useAudio } from "react-use"
 import { cn } from "@/lib/utils"
+import { useModal } from "@/hooks/use-modal-store"
 
 export interface ChallengeFooterProps {
   state: "inactive" | "check" | "wrong" | "correct"
@@ -18,6 +19,7 @@ const ChallengeFooter = ({ state }: ChallengeFooterProps) => {
   const [wrong, _w, wrongControls] = useAudio({
     src: "/sounds/incorrect.wav",
   })
+  const { onOpen } = useModal()
   const {
     attempt,
     triggerRefresh,
@@ -46,12 +48,18 @@ const ChallengeFooter = ({ state }: ChallengeFooterProps) => {
   }
   const handleCheck = async () => {
     setLoading(true)
-    const { right, end, expired } = (await checkSolution(attempt || "")) || {}
+    const { right, end, expired, nohearts } =
+      (await checkSolution(attempt || "")) || {}
     if (right) {
       correctControls.play()
     } else {
       wrongControls.play()
     }
+    expired && onOpen("timeout")
+
+    // if you close the no hearts left modal without clicking retry, it will break because the backend wont let you check when you have no hearts left
+    nohearts && onOpen("nohearts")
+
     setResponse(right ? "correct" : "wrong")
     setLoading(false)
     setEnd(end || false)
