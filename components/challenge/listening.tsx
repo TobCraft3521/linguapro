@@ -14,7 +14,7 @@ const Listening = ({ task }: ListeningProps) => {
   const { options: taskOptions } = task as ClientTask & {
     options: {
       audio: string
-      options: { text: string; img: string; sound: string }[]
+      options: string[]
     }
   }
   const [activeCard, setActiveCard] = useState<number | null>(null)

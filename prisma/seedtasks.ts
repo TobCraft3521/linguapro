@@ -53,7 +53,28 @@ const seed = async () => {
     })
   )?.id
 
-  if (!frenchCourseId || !firstUnitId || !secondUnitId || !thirdUnitId) return
+  const fourthUnitId = (
+    await db.unit.findFirst({
+      where: {
+        lesson: {
+          course: {
+            language: "FR",
+          },
+          index: 0,
+        },
+        index: 3,
+      },
+    })
+  )?.id
+
+  if (
+    !frenchCourseId ||
+    !firstUnitId ||
+    !secondUnitId ||
+    !thirdUnitId ||
+    !fourthUnitId
+  )
+    return
 
   await db.task.createMany({
     data: [
@@ -133,6 +154,18 @@ const seed = async () => {
           options: ["Aurevoir", "Salut", "Attends"],
         },
         solution: "10",
+      },
+      // unit 4
+      {
+        description: "Time to introduce some new vocabulary! Match the words.",
+        type: "VOCMATCH",
+        index: 0,
+        unitId: fourthUnitId,
+        options: [
+          ["boire", "aller", "dormir", "parler"],
+          ["go", "speak", "sleep", "drink"],
+        ],
+        solution: "3021",
       },
     ],
   })

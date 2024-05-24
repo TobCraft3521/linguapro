@@ -43,7 +43,7 @@ const UnitComp = ({
       return
     }
     if (!isActiveLesson || unit.index !== nextUnitIndex) {
-      toast.error("You must complete the previous unit first", {
+      toast.error("This unit is locked", {
         id: "error",
         duration: 2000,
       })
