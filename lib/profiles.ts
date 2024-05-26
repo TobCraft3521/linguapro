@@ -47,6 +47,28 @@ export const activeProfile = async () => {
   return profile
 }
 
+export const getDisplayUserData = async () => {
+  const { userId } = auth()
+  console.log(userId)
+  const profiles = await db.profile.findMany({
+    where: {
+      user: {
+        userId: userId || "",
+      },
+    },
+    orderBy: {
+      xp: "desc",
+    },
+    include: {
+      user: true,
+    },
+  })
+  return {
+    profiles,
+    mostRecentLanguage: await mostRecentLang(),
+  }
+}
+
 export const initProfile = async () => {
   const { userId } = auth()
   if (!userId) return null

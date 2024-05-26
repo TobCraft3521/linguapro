@@ -24,7 +24,7 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <head>
           <link
-            href="https://fonts.googleapis.com/css?family=Varela+Round"
+            href="https://fonts.googleapis.com/css?family=Varela+Round&display=optional"
             rel="stylesheet"
           ></link>
         </head>
